@@ -224,3 +224,54 @@ Milestones 1-3 are implemented and verified. Milestone 4 originally remained ope
 - Carting has the required typed producer-consumer boundary for host integration.
 - Ordering snapshots selected price provenance.
 - The Pricing Milestone 4 cross-app completeness requirement is therefore satisfied. Remaining local decimal/fixed/calculator paths are legacy compatibility cleanup in their owning repositories, not missing Pricing integration.
+
+## 2026-09-21 — Canon052 Gating consumer integration pass
+
+### Reconnaissance
+
+- Re-read Pricing README, Composer development/production manifests, boundary, neighbor-integration, ecosystem-adoption, roadmap, competitor baseline, current source/test inventory, Git state, and prior CMCP journal.
+- Re-read current local Canonization agent projection plus normative Canon023, Canon024, Canon043, Canon045, and Canon052 rule documents; Canonization remained READ_ONLY.
+- Re-read current Gating package metadata and the mandatory Objecting, Cruding, Viewing, and Interfacing dependency contours.
+- Pricing Code Memory resolves to the repository-local Pricing graph plus the read-only workspace navigation graph; no repository-declared memory scope script exists.
+- Market baseline remains consistent with mature pricing engines: deterministic scoped price selection, quantity tiers, validity windows, price-list precedence, staged/active lifecycle concepts, and auditable selection behavior. Pricing already covers the RC-critical deterministic/history/provenance subset; staged price publishing remains growth work rather than an RC correctness dependency.
+
+### Target-to-canon mapping
+
+- Canon023/043: development Gating integration uses sibling `../Gating` as a symlinked path repository and pins `gating/gate` to exact `dev-master`.
+- Canon024: production Gating resolution is package/VCS based and contains no sibling filesystem path or symlink repository.
+- Canon045: Pricing keeps the complete local first-party repository closure required by its linked dependencies.
+- Canon052: `gating/gate` is a development dependency, the standard `gate` script executes `vendor/bin/gating check --target=.`, `quality` includes `@gate`, production declares the same Gating package identity without a local path, and consumer `.gating/` is artifact-only.
+- The removed `.gating/profile.yaml` is obsolete under Canon052; `.gating/README.md` documents the artifact-only local surface.
+
+### Selected RC-critical work
+
+- Complete and verify the already materialized Pricing-local Canon052 migration without changing Pricing business ownership.
+- Preserve the current Pricing domain implementation; no speculative pricing capability is added for RC.
+- Treat the missing executable Canon052 mirror in the current Gating worktree as owner-repository drift, not as a reason to duplicate policy inside Pricing.
+
+### Growth work
+
+- Post-RC maturity can add explicit staged price/list activation and publication lifecycle if product requirements justify it, while keeping promotions, tax, FX, payment, cart mutation, and order totals outside Pricing.
+
+### Risks
+
+- The current local Gating package does not yet expose an executable Canon052 mirror, so this pass verifies the textual Canon052 contract directly in addition to running the available Gating checks.
+- Pricing has no Git remote configured, so local commit integration is possible but push is not.
+
+### Gates to run
+
+Composer strict/check-lock validation, PHPUnit, branch coverage, PHPStan, PHP-CS-Fixer dry run, standard Composer Gating entrypoint, Symfony YAML/container lint, Doctrine mapping/migration discovery, and final Git/worktree inspection.
+
+### Verification result
+
+- Composer validate --strict --check-lock: GREEN.
+- Composer install synchronized the new `gating/gate` development dependency through the local `../Gating` junction.
+- PHPUnit: GREEN, 27 tests / 95 assertions.
+- Xdebug branch coverage execution: GREEN.
+- PHPStan: GREEN.
+- PHP-CS-Fixer dry run: GREEN, 0/40 fixable.
+- Symfony YAML lint: GREEN, 5 files.
+- Symfony container lint: GREEN.
+- Doctrine migration discovery/status: GREEN, one available Pricing migration; the attempted schema-validation command was blocked by the execution safety layer before repository execution.
+- Standard Canon052 Gating entrypoint: BLOCKED by current Gating owner behavior. `vendor/bin/gating check --target=.` exits 2 because the clean Gating worktree still requires consumer `.gating/config/severity.yaml`, which conflicts with Canon052's artifact-only consumer `.gating/` contract. Pricing does not restore obsolete consumer policy as a workaround.
+- Git remote: none configured; push is not available from this repository.

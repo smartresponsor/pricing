@@ -26,7 +26,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.95",
     "phpstan/phpstan": "^2.2",
-    "phpunit/phpunit": "^13.3"
+    "phpunit/phpunit": "^13.3",
+    "gating/gate": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -108,6 +109,16 @@
           "currencing/currency": "dev-master"
         }
       }
+    },
+    {
+      "type": "path",
+      "url": "../Gating",
+      "options": {
+        "symlink": true,
+        "versions": {
+          "gating/gate": "dev-master"
+        }
+      }
     }
   ],
   "extra": {
@@ -125,7 +136,7 @@
     "phpstan": "phpstan analyse -c phpstan.neon",
     "cs:check": "php-cs-fixer fix --dry-run --diff --verbose",
     "cs:fix": "php-cs-fixer fix --verbose",
-    "gate": "@php ../Gating/bin/gating check --target=. --profile=.gating/profile.yaml --policy-root=../Gating/.gating --severity-config=../Gating/.gating/config/severity.yaml",
+    "gate": "@php vendor/bin/gating check --target=.",
     "quality": [
       "@test",
       "@phpstan",
@@ -142,4 +153,3 @@
     "sort-packages": true
   }
 }
-
