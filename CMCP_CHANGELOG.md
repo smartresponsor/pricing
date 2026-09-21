@@ -335,4 +335,11 @@ Pricing-local implementation, manifests, tests, static analysis, style, Symfony,
 
 ### RC conclusion
 
-Pricing is locally RC-green. The remaining work in this pass is Git integration only: commit the coherent current hardening wave, verify a clean post-commit worktree, establish `master` upstream against `origin`, push, and inspect final branch state.
+Pricing is locally RC-green.
+
+### Integration result
+
+- Signed hardening commit: `e4547c83a4b1407d05f1682f8a8e550b316b4413` (`refactor: harden Pricing RC contracts`).
+- Post-commit worktree was clean.
+- `master` was pushed to `git@github.com:smartresponsor/pricing.git` and configured to track `origin/master`.
+- Final acceptance requires only this journal synchronization commit and a clean/equal post-push branch check.
