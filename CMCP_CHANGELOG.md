@@ -264,6 +264,23 @@ Composer strict/check-lock validation, PHPUnit, branch coverage, PHPStan, PHP-CS
 
 ### Verification result
 
+- `composer validate --strict --check-lock`: GREEN.
+- PHPUnit: GREEN, 27 tests / 95 assertions.
+- PHPStan level 8: GREEN.
+- PHP-CS-Fixer dry run: GREEN, 0 fixable files.
+- Symfony YAML lint: GREEN, 5 files.
+- Symfony container lint: GREEN.
+- Doctrine mapping validation: GREEN; migration discovery reports one available Pricing migration.
+- Standard `composer gate`: BLOCKED by current Gating owner-side runtime drift. The installed Gating runner derives policy root from the consumer artifact-only `.gating/` directory and then requires `.gating/config/severity.yaml`; that file intentionally does not exist under the current Canon052 consumer model. Restoring legacy executable policy to Pricing would violate the selected migration.
+- The temporary `config/reference.php` change produced by Symfony tooling disappeared before final integration and is not part of the Pricing change set.
+- Git remote: none configured; push is not available for this repository.
+
+### RC conclusion
+
+Pricing-local implementation, manifests, tests, static analysis, style, Symfony, Doctrine, and Canon052 consumer wiring are complete. The remaining failing gate is an owner-side Gating compatibility defect outside Pricing's responsibility boundary and must be repaired in Gating rather than by reintroducing legacy consumer policy files here.
+
+### Verification result
+
 - Composer validate --strict --check-lock: GREEN.
 - Composer install synchronized the new `gating/gate` development dependency through the local `../Gating` junction.
 - PHPUnit: GREEN, 27 tests / 95 assertions.
