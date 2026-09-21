@@ -186,3 +186,24 @@ Milestones 1-3 are implemented and verified. Milestone 4 originally remained ope
 - Symfony YAML/container and Doctrine mapping/migration discovery were GREEN in the final Milestone 4 verification pass.
 - config/reference.php is a tracked Symfony auto-generated application configuration reference; its Composer/Flex regeneration after Doctrine installation is expected and retained.
 - Roadmap headings use explicit Milestone N naming rather than M1/M2 shorthand to avoid collision with orchestration budget notation.
+
+## 2026-09-21 — Ecosystem adoption and Sylius benchmark pass
+
+### Verified neighboring boundaries
+
+- Cataloging still persists a legacy decimal/float price projection in `CatalogRecordIndexEntity`; its own audit states Pricing must remain an external reference rather than an embedded engine.
+- Retailing `RetailOrderIntentFactory` still accepts/derives agreed or fixed local amounts; Retailing's own audit marks Pricing reference adoption PARTIAL.
+- Carting already exposes `CartPriceEstimateDTO` and `CartPriceEstimateProviderInterface`, explicitly treating pricing as an external typed producer fact; this boundary is compatible with Pricing `PriceQuoteDTO` through host integration.
+- Ordering owns committed monetary snapshots and `OrderPriceAuditEntity` but still exposes legacy/local pricing calculator surfaces; Pricing provenance adoption belongs to Ordering's migration work.
+- Added `docs/architecture/003-ecosystem-adoption-audit.adoc` so producer-contract completion and consumer-repository adoption are not conflated.
+
+### Sylius benchmark
+
+- Official Sylius Academy material verifies integer money representation, per-channel supported currencies, channel-specific variant pricing, and channel-specific pricing configuration.
+- Official Sylius catalog-promotion material verifies minimum-price and promotion-adjusted pricing concepts.
+- Exact deterministic tie-break behavior, a Pricing-equivalent immutable PriceSet identity, and historical selection replay/provenance remain NOT_VERIFIED and are not claimed.
+
+### Boundary result
+
+- Pricing itself requires no additional cross-repository code to expose the canonical producer contract.
+- Remaining Cataloging/Retailing/Ordering adoption must be implemented and gated inside those owning repositories; modifying them from Pricing would violate component ownership.

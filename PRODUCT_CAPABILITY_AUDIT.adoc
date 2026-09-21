@@ -23,7 +23,8 @@ Pricing now implements reusable price definitions and deterministic price select
 |History/versioning |IMPLEMENTED |Append-only Doctrine-backed PriceHistoryEntity stores canonical PriceSet revision payloads with SHA-256 integrity hashes and a unique `(priceSetId, revision)` constraint.
 |Selection snapshot/provenance |IMPLEMENTED |Snapshot captures PriceSet/Price/PriceList revisions, resource reference, selection context, monetary metadata, tax flag, selected instant, and explanation for downstream persistence.
 |Historical replay verification |IMPLEMENTED |PriceSelectionReplayService reruns deterministic selection against an exact historical PriceSet revision and rejects identity, revision, or monetary drift.
-|Neighbor integration |IMPLEMENTED |PriceQuoteDTO is the typed outbound Pricing contract for Cataloging/Retailing/Carting/Ordering; neighbor-specific storage/application remains owned by those repositories.
+|Neighbor integration |IMPLEMENTED AT PRICING BOUNDARY |PriceQuoteDTO is the typed outbound Pricing contract for Cataloging/Retailing/Carting/Ordering; neighbor-specific storage/application remains owned by those repositories.
+|Ecosystem adoption proof |PARTIAL |Carting already exposes a compatible typed producer-consumer seam. Cataloging still carries a legacy decimal price projection, Retailing still derives local agreed/fixed amounts, and Ordering still exposes legacy pricing calculator surfaces; their migrations belong to those owning repositories.
 |===
 
 == Milestone direction
@@ -31,5 +32,5 @@ Pricing now implements reusable price definitions and deterministic price select
 Milestone 1: IMPLEMENTED — PriceSet/Price/value/currency/effective-window invariants.
 Milestone 2: IMPLEMENTED — PriceList + contextual rules + deterministic selection result.
 Milestone 3: IMPLEMENTED — quantity tiers + reference/effective + tax-inclusion metadata.
-Milestone 4: IMPLEMENTED — selection snapshot, Currencing-backed currency/precision validation, typed PriceQuoteDTO neighbor contract, durable append-only revision history, deterministic historical replay, and database uniqueness concurrency protection are implemented. Pricing owns no cache layer, so runtime cache invalidation is NOT_APPLICABLE until a cache is introduced.
+Milestone 4: IMPLEMENTED AT PRICING BOUNDARY — selection snapshot, Currencing-backed currency/precision validation, typed PriceQuoteDTO neighbor contract, durable append-only revision history, deterministic historical replay, and database uniqueness concurrency protection are implemented. Pricing owns no cache layer, so runtime cache invalidation is NOT_APPLICABLE until a cache is introduced. Cross-repository adoption remains explicitly tracked in `docs/architecture/003-ecosystem-adoption-audit.adoc`.
 

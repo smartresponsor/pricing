@@ -1,5 +1,5 @@
 = Pricing Competitor Baseline
-:revdate: 2026-09-20
+:revdate: 2026-09-21
 
 This benchmark records only capabilities supported by local evidence or current official competitor documentation. Unsupported competitor conclusions remain NOT_VERIFIED.
 
@@ -14,13 +14,13 @@ This benchmark records only capabilities supported by local evidence or current 
 [cols="3,3,3,3",options="header"]
 |===
 |Capability |Pricing |Medusa v2 |Vendure / Sylius
-|Price-set identity and multi-currency definitions |IMPLEMENTED: PriceSetDTO and PriceDefinitionDTO |VERIFIED: PriceSet groups resource prices and supports multiple currency-coded prices |Vendure: NOT_VERIFIED for equivalent PriceSet identity. Sylius: NOT_VERIFIED in this pass.
-|Contextual price lists/rules |IMPLEMENTED: list- and price-level exact-match context |VERIFIED: PriceList and price rules constrain prices by context such as region/customer group |Vendure: VERIFIED in Platform Price Rules through price lists with customer-group/customer-specific rule patterns. Sylius: NOT_VERIFIED.
-|Quantity tiers |IMPLEMENTED: inclusive minimum/maximum quantity bounds |VERIFIED: min_quantity/max_quantity tier prices participate in calculation |Vendure: VERIFIED in Platform Price Rules as quantity breaks. Sylius: NOT_VERIFIED.
+|Price-set identity and multi-currency definitions |IMPLEMENTED: PriceSetDTO and PriceDefinitionDTO |VERIFIED: PriceSet groups resource prices and supports multiple currency-coded prices |Vendure: NOT_VERIFIED for equivalent PriceSet identity. Sylius: VERIFIED for integer money, per-channel supported currencies, and variant/channel pricing; equivalent PriceSet identity remains NOT_VERIFIED.
+|Contextual price lists/rules |IMPLEMENTED: list- and price-level exact-match context |VERIFIED: PriceList and price rules constrain prices by context such as region/customer group |Vendure: VERIFIED in Platform Price Rules through price lists with customer-group/customer-specific rule patterns. Sylius: VERIFIED for channel-specific variant pricing and channel-specific commercial configuration; customer-group-equivalent price-rule parity remains NOT_VERIFIED.
+|Quantity tiers |IMPLEMENTED: inclusive minimum/maximum quantity bounds |VERIFIED: min_quantity/max_quantity tier prices participate in calculation |Vendure: VERIFIED in Platform Price Rules as quantity breaks. Sylius: pricing tiers are documented as an optional capability in Sylius feature material, but exact current core behavior remains NOT_VERIFIED.
 |Deterministic best-price selection |IMPLEMENTED: explicit priority, specificity, tier, amount, revision, and stable id ranking |VERIFIED: calculatePrices returns a best-matching price and documents context/rule matching; exact tie-break parity is NOT_VERIFIED |Vendure/Sylius: exact deterministic tie-break parity NOT_VERIFIED.
-|Reference/original versus effective price |IMPLEMENTED as referenceAmountMinor metadata distinct from selected amount |VERIFIED: calculated price and original price are distinct in calculation output |Vendure/Sylius: NOT_VERIFIED in this pass.
-|Tax-inclusive metadata boundary |IMPLEMENTED as passive taxIncluded metadata; Taxating owns calculation |VERIFIED: Pricing Module advertises tax-inclusive pricing behavior |Vendure core exposes priceIncludesTax in price-calculation contracts. Sylius: NOT_VERIFIED.
-|Selection provenance and historical replay |IMPLEMENTED snapshot/replay contract; durable storage remains open |No equivalent replay/provenance contract verified from reviewed pricing documentation |No equivalent replay/provenance contract verified from reviewed documentation.
+|Reference/original versus effective price |IMPLEMENTED as referenceAmountMinor metadata distinct from selected amount |VERIFIED: calculated price and original price are distinct in calculation output |Vendure: NOT_VERIFIED in this pass. Sylius: catalog-promotion material verifies minimum-price and promotion-adjusted pricing concepts, but an equivalent canonical original/effective selection contract remains NOT_VERIFIED.
+|Tax-inclusive metadata boundary |IMPLEMENTED as passive taxIncluded metadata; Taxating owns calculation |VERIFIED: Pricing Module advertises tax-inclusive pricing behavior |Vendure core exposes priceIncludesTax in price-calculation contracts. Sylius official material verifies per-channel tax configuration, but an equivalent passive price-level taxIncluded metadata contract remains NOT_VERIFIED.
+|Selection provenance and historical replay |IMPLEMENTED snapshot/replay contract with durable append-only revision storage |No equivalent replay/provenance contract verified from reviewed pricing documentation |No equivalent replay/provenance contract verified from reviewed Vendure or Sylius material.
 |===
 
 == Official evidence reviewed
@@ -30,6 +30,10 @@ This benchmark records only capabilities supported by local evidence or current 
 * Medusa Prices Calculation: https://docs.medusajs.com/resources/commerce-modules/pricing/price-calculation
 * Vendure Platform Price Rules: https://docs.vendure.io/current/platform/price-rules/getting-started
 * Vendure OrderItemPriceCalculationStrategy example: https://docs.vendure.io/current/core/how-to/configurable-products
+* Sylius Academy Money and Currencies Overview: https://academy.sylius.com/courses/sylius-practical-mastery-course/videos/money-and-currencies-overview
+* Sylius Academy Product Importer Part 2: https://academy.sylius.com/courses/sylius-practical-mastery-course/videos/product-importer-part-2
+* Sylius Academy Channels Overview: https://academy.sylius.com/courses/sylius-practical-mastery-course/videos/channels-overview
+* Sylius catalog-promotion/minimum-price release evidence: https://sylius.com/blog/sylius-1-11-a-lovable-release/
 
 == Boundary decision
 
