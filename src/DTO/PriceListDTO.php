@@ -43,7 +43,10 @@ final readonly class PriceListDTO
             && (null === $this->endsAt || $at < $this->endsAt);
     }
 
-    /** @param array<string, string> $context */
+    /** Returns whether all price-list contextual constraints match the supplied context.
+     *
+     * @param array<string, string> $context
+     */
     public function matchesContext(array $context): bool
     {
         foreach ($this->context as $name => $value) {

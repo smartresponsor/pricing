@@ -9,6 +9,11 @@
     "php": "^8.4",
     "collectioning/collection": "dev-master",
     "cruding/crud": "dev-master",
+    "currencing/currency": "dev-master",
+    "doctrine/dbal": "^4.4",
+    "doctrine/doctrine-bundle": "^3.2",
+    "doctrine/doctrine-migrations-bundle": "^4.0",
+    "doctrine/orm": "^3.3",
     "easycorp/easyadmin-bundle": "^5.5",
     "interfacing/interface": "dev-master",
     "objecting/object": "dev-master",
@@ -93,6 +98,16 @@
           "interfacing/interface": "dev-master"
         }
       }
+    },
+    {
+      "type": "path",
+      "url": "../Currencing",
+      "options": {
+        "symlink": true,
+        "versions": {
+          "currencing/currency": "dev-master"
+        }
+      }
     }
   ],
   "extra": {
@@ -119,6 +134,11 @@
     ]
   },
   "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "symfony/flex": true,
+      "symfony/runtime": true
+    },
     "sort-packages": true
   }
 }

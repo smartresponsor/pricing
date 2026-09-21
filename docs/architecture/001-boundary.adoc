@@ -28,5 +28,5 @@ Pricing owns reusable price definitions and deterministic price selection indepe
 
 == Current implementation scope
 
-Pricing exposes immutable price, price-set, price-list, selection-criteria and selection-result contracts plus a deterministic selection service. Selection operates only on caller-provided reusable price definitions and performs no promotion evaluation, currency conversion, tax calculation, payment execution, or cart/order total aggregation.
+Pricing exposes immutable price, price-set, price-list, selection-criteria/result/snapshot contracts, deterministic selection and historical replay services, plus append-only Doctrine-backed PriceSet revision history. Stored revisions are canonical JSON-compatible payloads protected by SHA-256 integrity hashes and a unique PriceSet/revision constraint. Pricing still performs no promotion evaluation, currency conversion, tax calculation, payment execution, or cart/order total aggregation.
 

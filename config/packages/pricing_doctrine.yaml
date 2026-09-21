@@ -1,0 +1,9 @@
+doctrine:
+    orm:
+        mappings:
+            Pricing:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Pricing\Entity'
+                alias: Pricing

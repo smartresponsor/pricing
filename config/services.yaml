@@ -1,6 +1,42 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Pricing\Repository\PriceHistoryRepository: ~
+    App\Pricing\Service\PriceHistoryCodec: ~
+    App\Pricing\Service\PriceHistoryService: ~
+    App\Pricing\Service\PriceHistoricalSelectionService: ~
+    App\Pricing\Service\PriceCurrencyValidationService: ~
+    App\Pricing\Service\PriceQuoteService: ~
     App\Pricing\Service\PriceSelectionService: ~
+    App\Pricing\Service\PriceSelectionSnapshotService: ~
+    App\Pricing\Service\PriceSelectionReplayService: ~
+
+    App\Pricing\RepositoryInterface\PriceHistoryRepositoryInterface:
+        alias: App\Pricing\Repository\PriceHistoryRepository
+
+    App\Pricing\ServiceInterface\PriceHistoryCodecInterface:
+        alias: App\Pricing\Service\PriceHistoryCodec
+
+    App\Pricing\ServiceInterface\PriceHistoryServiceInterface:
+        alias: App\Pricing\Service\PriceHistoryService
+
+    App\Pricing\ServiceInterface\PriceHistoricalSelectionServiceInterface:
+        alias: App\Pricing\Service\PriceHistoricalSelectionService
+
+    App\Pricing\ServiceInterface\PriceCurrencyValidationServiceInterface:
+        alias: App\Pricing\Service\PriceCurrencyValidationService
+
+    App\Pricing\ServiceInterface\PriceQuoteServiceInterface:
+        alias: App\Pricing\Service\PriceQuoteService
 
     App\Pricing\ServiceInterface\PriceSelectionServiceInterface:
         alias: App\Pricing\Service\PriceSelectionService
+
+    App\Pricing\ServiceInterface\PriceSelectionSnapshotServiceInterface:
+        alias: App\Pricing\Service\PriceSelectionSnapshotService
+
+    App\Pricing\ServiceInterface\PriceSelectionReplayServiceInterface:
+        alias: App\Pricing\Service\PriceSelectionReplayService
 

@@ -1,0 +1,57 @@
+= Pricing Neighbor Integration Contract
+:revdate: 2026-09-21
+
+== Canonical outbound contract
+
+Neighboring commerce components consume Pricing through `PriceQuoteServiceInterface`.
+
+The quote flow is:
+
+. caller provides a `PriceSetDTO` for its opaque external priceable reference
+. caller provides `PriceSelectionCriteriaDTO`
+. host integration supplies Currencing `CurrencyCodeValidatorInterface` and `CurrencyPrecisionResolverInterface`
+. Pricing validates supported currencies and authoritative precision through Currencing
+. Pricing performs deterministic selection
+. Pricing captures immutable selection provenance
+. Pricing returns `PriceQuoteDTO`
+
+`PriceQuoteDTO` contains:
+
+* `PriceSelectionSnapshotDTO`
+* `PriceCurrencyMetadataDTO`
+* selected effective amount in minor units
+* opaque priceable-resource reference
+
+== Ownership by neighbor
+
+Cataloging::
+Owns product/catalog resource identity and may store/reference Pricing priceable identifiers. It does not calculate prices.
+
+Retailing::
+Owns listing/offer projection and may consume `PriceQuoteDTO` as the selected commercial price projection. Pricing remains the source of reusable-price selection.
+
+Carting::
+Owns mutable cart state. It may snapshot `PriceQuoteDTO` data on a cart line but does not own the pricing rules used to select it.
+
+Ordering::
+Owns committed order state and totals. It should persist the `PriceSelectionSnapshotDTO` provenance necessary to explain the selected reusable price without recomputing historical Pricing state.
+
+== Currency boundary
+
+Pricing does not ship a second ISO currency registry.
+
+Supported-code validation and minor-unit/factor resolution are delegated to Currencing public interfaces. Pricing amounts remain integer minor-unit values, so decimal rounding and normalization stay outside the reusable price-selection core.
+
+Exchanging remains the sole owner of FX rates and conversion.
+
+== History boundary
+
+`PriceHistoryServiceInterface` stores immutable `PriceSetDTO` revisions append-only.
+
+`PriceHistoricalSelectionServiceInterface` can load the exact recorded PriceSet revision identified by a downstream snapshot and verify historical deterministic replay.
+
+== Cache invalidation
+
+Pricing currently owns no cache layer. Therefore no cache invalidation subsystem is introduced.
+
+If a future Pricing cache is added, the immutable `(priceSetId, revision)` history identity must remain stable and current-selection caches must be invalidated when a new current PriceSet revision becomes active. This is a future implementation requirement, not an unimplemented runtime dependency today.

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b893c24fa58f87d7081a15bc8cf867d",
+    "content-hash": "3ba89870a6995c696f2ab3e585d0578b",
     "packages": [
         {
             "name": "collectioning/collection",
@@ -156,7 +156,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Cruding",
-                "reference": "cf001fa4b5380f1756f11d16933d9cc834ebdf32"
+                "reference": "998dc7088cb4dec6e7bacb8f4568f8c059281793"
             },
             "require": {
                 "collectioning/collection": "dev-master",
@@ -258,6 +258,130 @@
                 "proprietary"
             ],
             "description": "Universal CRUD route processor bundle for Symfony host applications.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "currencing/currency",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../Currencing",
+                "reference": "5ba136f96bee1f75c9a0fdda583dae2982e8c36f"
+            },
+            "require": {
+                "collectioning/collection": "dev-master",
+                "cruding/crud": "dev-master",
+                "doctrine/dbal": "^4.4",
+                "doctrine/doctrine-bundle": "^3.2",
+                "doctrine/doctrine-migrations-bundle": "^4.0",
+                "doctrine/orm": "^3.3",
+                "easycorp/easyadmin-bundle": "^5.0",
+                "ext-ctype": "*",
+                "ext-iconv": "*",
+                "ext-intl": "*",
+                "interfacing/interface": "dev-master",
+                "objecting/object": "dev-master",
+                "php": "^8.4",
+                "symfony/asset": "^8.1",
+                "symfony/console": "^8.1",
+                "symfony/dotenv": "^8.1",
+                "symfony/flex": "^2.4",
+                "symfony/form": "^8.1",
+                "symfony/framework-bundle": "^8.1",
+                "symfony/runtime": "^8.1",
+                "symfony/serializer": "^8.1",
+                "symfony/twig-bundle": "^8.1",
+                "symfony/validator": "^8.1",
+                "symfony/var-exporter": "^8.1",
+                "symfony/yaml": "^8.1",
+                "tabling/table": "dev-master",
+                "twig/extra-bundle": "^3.21",
+                "twig/twig": "^3.21",
+                "viewing/view": "dev-master"
+            },
+            "require-dev": {
+                "doctrine/doctrine-fixtures-bundle": "^4.0",
+                "friendsofphp/php-cs-fixer": "^3.94",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^11.5 || ^12.0",
+                "symfony/browser-kit": "^8.1",
+                "symfony/css-selector": "^8.1",
+                "symfony/panther": "^2.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "allow-contrib": false,
+                    "require": "^8.1",
+                    "bundle": "App\\Currencing\\CurrencingBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "App\\Currencing\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "App\\Currencing\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "auto-scripts": {
+                    "cache:clear": "symfony-cmd",
+                    "assets:install %PUBLIC_DIR%": "symfony-cmd",
+                    "importmap:install": "symfony-cmd"
+                },
+                "post-install-cmd": [
+                    "@auto-scripts"
+                ],
+                "post-update-cmd": [
+                    "@auto-scripts"
+                ],
+                "cs:check": [
+                    "php-cs-fixer fix --dry-run --diff --verbose"
+                ],
+                "cs:fix": [
+                    "php-cs-fixer fix --verbose"
+                ],
+                "phpstan": [
+                    "phpstan analyse -c phpstan.dist.neon"
+                ],
+                "test": [
+                    "phpunit"
+                ],
+                "test:coverage": [
+                    "@php -r \"if (!is_dir('var/coverage')) { mkdir('var/coverage', 0777, true); }\"",
+                    "@php -d xdebug.mode=coverage vendor/bin/phpunit --path-coverage --coverage-text=var/coverage/summary.txt"
+                ],
+                "schema:parity": [
+                    "php tools/currencing-schema-migration-mirror-check.php",
+                    "php bin/console doctrine:schema:validate --skip-sync"
+                ],
+                "schema:diff": [
+                    "php bin/console doctrine:schema:update --dump-sql"
+                ],
+                "currencing:gates": [
+                    "php tools/currencing-structure-check.php",
+                    "php tools/currencing-runtime-smoke-check.php",
+                    "php tools/currencing-autoload-smoke-check.php",
+                    "php tools/currencing-service-alias-closure-check.php",
+                    "php tools/currencing-template-bridge-contract-check.php",
+                    "php tools/currencing-console-runtime-proof-check.php",
+                    "php tools/currencing-database-runtime-proof-check.php",
+                    "php tools/currencing-schema-migration-mirror-check.php",
+                    "php tools/currencing-api-contract-check.php",
+                    "php tools/currencing-release-candidate-check.php",
+                    "php tools/currencing-standalone-runtime-foundation-check.php"
+                ]
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Currencing process app",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -622,6 +746,98 @@
             "time": "2026-09-09T11:58:04+00:00"
         },
         {
+            "name": "doctrine/doctrine-migrations-bundle",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
+                "reference": "43e9212c7441178e3748580e53f88c08f4e70e5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/43e9212c7441178e3748580e53f88c08f4e70e5f",
+                "reference": "43e9212c7441178e3748580e53f88c08f4e70e5f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^4",
+                "doctrine/doctrine-bundle": "^3",
+                "doctrine/migrations": "^3.2",
+                "php": "^8.4",
+                "psr/log": "^3",
+                "symfony/config": "^6.4 || ^7.0 || ^8.0",
+                "symfony/console": "^6.4 || ^7.0 || ^8.0",
+                "symfony/dependency-injection": "^6.4 || ^7.0 || ^8.0",
+                "symfony/deprecation-contracts": "^3",
+                "symfony/framework-bundle": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-foundation": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-kernel": "^6.4 || ^7.0 || ^8.0",
+                "symfony/service-contracts": "^3.0"
+            },
+            "require-dev": {
+                "composer/semver": "^3.0",
+                "doctrine/coding-standard": "^14",
+                "doctrine/orm": "^3",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-deprecation-rules": "^2",
+                "phpstan/phpstan-phpunit": "^2",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpstan/phpstan-symfony": "^2",
+                "phpunit/phpunit": "^12.5",
+                "symfony/var-exporter": "^6.4 || ^7 || ^8"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\MigrationsBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Doctrine Project",
+                    "homepage": "https://www.doctrine-project.org"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DoctrineMigrationsBundle",
+            "homepage": "https://www.doctrine-project.org",
+            "keywords": [
+                "dbal",
+                "migrations",
+                "schema"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/DoctrineMigrationsBundle/issues",
+                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/4.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdoctrine-migrations-bundle",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-08-26T05:54:54+00:00"
+        },
+        {
             "name": "doctrine/event-manager",
             "version": "2.1.1",
             "source": {
@@ -873,27 +1089,25 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd"
+                "reference": "e96fe45e92a54233726014a7cc7340abf29bb14c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd",
-                "reference": "31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/e96fe45e92a54233726014a7cc7340abf29bb14c",
+                "reference": "e96fe45e92a54233726014a7cc7340abf29bb14c",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.5",
-                "psalm/plugin-phpunit": "^0.18.3",
-                "vimeo/psalm": "^5.21"
+                "doctrine/coding-standard": "^14",
+                "phpstan/phpstan": "^2",
+                "phpunit/phpunit": "^10.5.58 || ^12.5.4"
             },
             "type": "library",
             "autoload": {
@@ -930,7 +1144,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/lexer/issues",
-                "source": "https://github.com/doctrine/lexer/tree/3.0.1"
+                "source": "https://github.com/doctrine/lexer/tree/3.0.2"
             },
             "funding": [
                 {
@@ -946,7 +1160,110 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-05T11:56:58+00:00"
+            "time": "2026-06-14T20:44:06+00:00"
+        },
+        {
+            "name": "doctrine/migrations",
+            "version": "3.9.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/migrations.git",
+                "reference": "96cb2a89b56c9efb0bac38e606dc0b0f13e650ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/96cb2a89b56c9efb0bac38e606dc0b0f13e650ec",
+                "reference": "96cb2a89b56c9efb0bac38e606dc0b0f13e650ec",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2",
+                "doctrine/dbal": "^3.6 || ^4",
+                "doctrine/deprecations": "^0.5.3 || ^1",
+                "doctrine/event-manager": "^1.2 || ^2.0",
+                "php": "^8.1",
+                "psr/log": "^1.1.3 || ^2 || ^3",
+                "symfony/console": "^5.4 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/stopwatch": "^5.4 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/var-exporter": "^6.2 || ^7.0 || ^8.0"
+            },
+            "conflict": {
+                "doctrine/orm": "<2.12 || >=4"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^14",
+                "doctrine/orm": "^2.13 || ^3",
+                "doctrine/persistence": "^2 || ^3 || ^4",
+                "doctrine/sql-formatter": "^1.0",
+                "ext-pdo_sqlite": "*",
+                "fig/log-test": "^1",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-deprecation-rules": "^2",
+                "phpstan/phpstan-phpunit": "^2",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpstan/phpstan-symfony": "^2",
+                "phpunit/phpunit": "^10.3 || ^11.0 || ^12.0",
+                "symfony/cache": "^5.4 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/process": "^5.4 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/yaml": "^5.4 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "suggest": {
+                "doctrine/sql-formatter": "Allows to generate formatted SQL with the diff command.",
+                "symfony/yaml": "Allows the use of yaml for migration configuration files."
+            },
+            "bin": [
+                "bin/doctrine-migrations"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Migrations\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Michael Simonson",
+                    "email": "contact@mikesimonson.com"
+                }
+            ],
+            "description": "PHP Doctrine Migrations project offer additional functionality on top of the database abstraction layer (DBAL) for versioning your database schema and easily deploying changes to it. It is a very easy to use and a powerful tool.",
+            "homepage": "https://www.doctrine-project.org/projects/migrations.html",
+            "keywords": [
+                "database",
+                "dbal",
+                "migrations"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/migrations/issues",
+                "source": "https://github.com/doctrine/migrations/tree/3.9.7"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fmigrations",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-04-23T19:33:20+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -1303,7 +1620,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Interfacing",
-                "reference": "02c5ccf77ad1986f2187e8d91f8a422e86af0d97"
+                "reference": "34c65c769e4306fb5c79395c937bb682d32a42a0"
             },
             "require": {
                 "collectioning/collection": "dev-master",
@@ -1447,7 +1764,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Objecting",
-                "reference": "24d40b48ae0882f9e137c4526250c6b368f407bb"
+                "reference": "28dde694f067b3f4cac5c14db1385266d1d8b767"
             },
             "require": {
                 "doctrine/orm": "^3.3",
@@ -3241,6 +3558,79 @@
                 }
             ],
             "time": "2026-09-10T19:14:39+00:00"
+        },
+        {
+            "name": "symfony/flex",
+            "version": "v2.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/flex.git",
+                "reference": "4a6d98eea3ebc7f68d82810cb682eedca2649e99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/4a6d98eea3ebc7f68d82810cb682eedca2649e99",
+                "reference": "4a6d98eea3ebc7f68d82810cb682eedca2649e99",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.1",
+                "php": ">=8.1"
+            },
+            "conflict": {
+                "composer/semver": "<1.7.2",
+                "symfony/dotenv": "<5.4"
+            },
+            "require-dev": {
+                "composer/composer": "^2.1",
+                "phpunit/phpunit": "^12.4",
+                "symfony/dotenv": "^6.4.41|^7.4.13|^8.0.13",
+                "symfony/filesystem": "^6.4|^7.4|^8.0",
+                "symfony/process": "^6.4|^7.4|^8.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Symfony\\Flex\\Flex"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Flex\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien.potencier@gmail.com"
+                }
+            ],
+            "description": "Composer plugin for Symfony",
+            "support": {
+                "issues": "https://github.com/symfony/flex/issues",
+                "source": "https://github.com/symfony/flex/tree/v2.11.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-29T17:25:22+00:00"
         },
         {
             "name": "symfony/form",
@@ -5264,6 +5654,90 @@
             "time": "2026-08-17T13:18:34+00:00"
         },
         {
+            "name": "symfony/runtime",
+            "version": "v8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/runtime.git",
+                "reference": "b7ea1abe04561e814b3134db0f56c287cedb35cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/runtime/zipball/b7ea1abe04561e814b3134db0f56c287cedb35cc",
+                "reference": "b7ea1abe04561e814b3134db0f56c287cedb35cc",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0|^2.0",
+                "php": ">=8.4.1"
+            },
+            "conflict": {
+                "symfony/error-handler": "<7.4"
+            },
+            "require-dev": {
+                "composer/composer": "^2.6",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/dotenv": "^7.4|^8.0",
+                "symfony/http-foundation": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Symfony\\Component\\Runtime\\Internal\\ComposerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Runtime\\": "",
+                    "Symfony\\Runtime\\Symfony\\Component\\": "Internal/"
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Enables decoupling PHP applications from global state",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "runtime"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/runtime/tree/v8.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-29T05:06:50+00:00"
+        },
+        {
             "name": "symfony/security-bundle",
             "version": "v8.1.7",
             "source": {
@@ -5793,6 +6267,72 @@
                 }
             ],
             "time": "2026-07-27T15:39:01+00:00"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "v8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/stopwatch.git",
+                "reference": "21c07b026905d596e8379caeb115d87aa479499d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/21c07b026905d596e8379caeb115d87aa479499d",
+                "reference": "21c07b026905d596e8379caeb115d87aa479499d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides a way to profile code",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/stopwatch/tree/v8.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-29T05:06:50+00:00"
         },
         {
             "name": "symfony/string",
@@ -6933,7 +7473,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Tabling",
-                "reference": "5d875e1945462b21c48963621b4d3350f09ebe5e"
+                "reference": "beb48184a9615ae92b28239b750bd97d5421b8cf"
             },
             "require": {
                 "collectioning/collection": "dev-master",
@@ -10471,72 +11011,6 @@
             "time": "2026-09-02T12:40:29+00:00"
         },
         {
-            "name": "symfony/stopwatch",
-            "version": "v8.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "21c07b026905d596e8379caeb115d87aa479499d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/21c07b026905d596e8379caeb115d87aa479499d",
-                "reference": "21c07b026905d596e8379caeb115d87aa479499d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.4.1",
-                "symfony/service-contracts": "^2.5|^3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Stopwatch\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides a way to profile code",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/stopwatch/tree/v8.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-05-29T05:06:50+00:00"
-        },
-        {
             "name": "theseer/tokenizer",
             "version": "2.0.1",
             "source": {
@@ -10592,6 +11066,7 @@
     "stability-flags": {
         "collectioning/collection": 20,
         "cruding/crud": 20,
+        "currencing/currency": 20,
         "interfacing/interface": 20,
         "objecting/object": 20,
         "tabling/table": 20,

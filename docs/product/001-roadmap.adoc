@@ -1,26 +1,27 @@
 = Pricing Roadmap
 
-== M1
+== Milestone 1
 
 * Price and PriceSet identity.
 * External priceable-resource references.
 * Currency and effective-date invariants.
 
-== M2
+== Milestone 2
 
 * PriceList lifecycle.
 * Contextual pricing rules.
 * Deterministic selection explanations.
 
-== M3
+== Milestone 3
 
 * Quantity tiers.
 * Original/effective price semantics.
 * Tax-inclusive metadata.
 
-== M4
+== Milestone 4
 
-* Cataloging, Retailing, and Ordering integration.
-* History and audit.
+* Typed Cataloging, Retailing, Carting, and Ordering consumption contract.
+* Currencing-backed supported-currency and precision semantics.
+* Durable history, audit, provenance, and historical replay.
 * Evidence-backed benchmark against Medusa v2, Vendure, and Sylius.
 

@@ -93,4 +93,96 @@ Composer validation, PHP syntax lint where exposed by Console MCP, PHPUnit, bran
 
 ### Material checkpoint
 
-M1-M3 are implemented and verified. M4 remains intentionally open: durable selection-history persistence, historical replay storage, typed Cataloging/Retailing/Carting/Ordering integration adapters, and persistence-level effective-window concurrency/cache invalidation. No commit or push was performed.
+Milestones 1-3 are implemented and verified. Milestone 4 originally remained open for durable selection-history persistence, replay, typed neighbor integration, and persistence-level concurrency/cache invalidation. No commit or push was performed in that pass.
+
+## 2026-09-20 — Milestone 4 provenance/replay pass
+
+### Implemented
+
+- Added immutable PriceSelectionSnapshotDTO carrying PriceSet, Price, and PriceList revision provenance plus resource reference, selection context, selected instant, amount/reference amount, currency, quantity, tax-inclusion metadata, and explanation.
+- Added PriceSelectionSnapshotServiceInterface/PriceSelectionSnapshotService for producing downstream-safe pricing provenance without moving cart/order ownership into Pricing.
+- Added PriceSelectionReplayServiceInterface/PriceSelectionReplayService and PriceReplayMismatchException; replay requires exact historical PriceSet identity/revision and rejects silent selected-price/list/amount/reference/tax drift.
+- Wired snapshot/replay services through Symfony DI.
+- Added regression coverage for exact historical replay, revision mismatch, silent mutation detection, invalid price/list/set/criteria state, zero-price semantics, effective-window boundaries, tier boundaries, context rejection reasons, and no-price failure.
+- Replaced the skeleton competitor baseline with evidence-backed Medusa/Vendure findings and explicit NOT_VERIFIED markers where current official evidence was insufficient.
+
+### Verification
+
+- PHPUnit: GREEN, 15 tests / 61 assertions.
+- Xdebug branch coverage: 90.47% (266/294); line coverage: 93.75% (195/208).
+- PHPStan level 8: GREEN.
+- PHP-CS-Fixer dry run: GREEN, 0/20 fixable.
+- Gating: GREEN, 17/17 rules, zero failures/warnings/suppressions/skips; Canon031 class docs 100%, contract-method docs 84.6%.
+- Symfony YAML lint: GREEN. Symfony container lint: GREEN.
+
+### Remaining RC work
+
+- Currencing-backed supported-currency/precision validation rather than syntax-only ISO-shaped codes.
+- Typed Cataloging/Retailing/Carting/Ordering consumption adapters and contract tests.
+- Explicit cache invalidation behavior for consumers caching historical/current price selections.
+- Sylius pricing benchmark evidence remains NOT_VERIFIED from the official documentation reviewed in this pass.
+
+## 2026-09-20 — Milestone 4 durable-history pass
+
+### Implemented
+
+- Added explicit Currencing and Doctrine dependencies to development/production manifests; Composer lock/install validated successfully after adopting Currencing's canonical Composer plugin allow-list.
+- Added standalone Doctrine ORM/migrations configuration and registered Doctrine bundles without changing Pricing's application namespace or introducing Domain/Port/Adapter topology.
+- Added append-only `PriceHistoryEntity`, `PriceHistoryRepository`, repository interface, canonical PriceSet history codec, history service, and durable historical-selection orchestration.
+- Persisted history uses canonical JSON-compatible PriceSet payloads, SHA-256 integrity hashes, and a unique `(price_set_id, revision)` database constraint.
+- Added idempotent same-revision recording and conflicting-revision detection, including race recovery semantics when an identical concurrent revision wins the insert.
+- Added portable Doctrine migration `Version20260921031000` and real Symfony/Doctrine SQLite integration tests for persist/load and unique-revision conflict behavior.
+
+### Verification
+
+- Composer validate --strict --check-lock: GREEN.
+- PHPUnit: GREEN, 20 tests / 82 assertions, including real Doctrine persistence.
+- Xdebug coverage: 85.74% branches (349/407), 89.45% lines (331/370).
+- PHPStan level 8: GREEN.
+- PHP-CS-Fixer: GREEN.
+- Canon/Gating: GREEN, 17/17 with zero warnings/skips/suppressions; Canon031 is 100% classes and 100% contract methods.
+- Symfony YAML lint: GREEN, 5 files.
+- Symfony container lint: GREEN.
+- Doctrine mapping validation: GREEN; migration discovery reports one available Pricing migration.
+
+### Remaining RC work
+
+- Currencing-backed supported-currency/precision enforcement and the Pricing-owned typed neighbor quote contract were the next local RC slice.
+- Neighbor-specific persistence/application remains work for Cataloging/Retailing/Carting/Ordering owning repositories rather than cross-repository mutation from Pricing.
+- Explicit cache invalidation remains NOT_APPLICABLE while Pricing has no cache layer.
+
+## 2026-09-21 — Milestone 4 currency/neighbor-contract pass
+
+### Implemented
+
+- Added `PriceCurrencyValidationService` consuming Currencing `CurrencyCodeValidatorInterface` and `CurrencyPrecisionResolverInterface` without importing Currencing persistence or duplicating a currency registry.
+- Added `PriceCurrencyMetadataDTO` carrying authoritative currency code, minor unit, and factor.
+- Added `PriceQuoteDTO` and `PriceQuoteServiceInterface`/`PriceQuoteService` as the typed outbound Pricing contract for Cataloging/Retailing/Carting/Ordering consumers.
+- Quote creation validates every defined price currency and the requested selection currency through Currencing, then performs deterministic selection and captures immutable provenance.
+- Added `docs/architecture/002-neighbor-integration.adoc` documenting ownership, currency, history/replay, and cache boundaries.
+- Re-read Cataloging/Retailing/Carting/Ordering Pricing references. Pricing exports the canonical contract; neighbor-specific adoption belongs to each owning repository and is not duplicated here.
+
+### Verification
+
+- PHPUnit after currency/quote slice: GREEN, 23 tests / 91 assertions.
+- PHPStan level 8: GREEN.
+- Symfony container lint: GREEN.
+
+### Milestone conclusion
+
+- Pricing-local Milestone 4 capabilities are complete: provenance, durable revision history, historical replay, Currencing-backed validation/precision metadata, typed outbound neighbor quote contract, and database uniqueness concurrency protection.
+- Pricing owns no cache, therefore cache invalidation is NOT_APPLICABLE in the current implementation. A future cache must invalidate current-selection entries on revision activation while preserving immutable historical revision identity.
+
+### Final hardening checkpoint
+
+- Added explicit history not-found and SHA-256 integrity-mismatch tests.
+- Added PriceCurrencyMetadataDTO factor-consistency and PriceQuoteDTO currency-consistency invariant tests.
+- Final PHPUnit: GREEN, 27 tests / 95 assertions.
+- Final Xdebug coverage: 86.27% branches (371/430), 90.15% lines (357/396).
+- PHPStan level 8: GREEN.
+- PHP-CS-Fixer: GREEN.
+- Canon/Gating: GREEN, 17/17 rules, zero failures/warnings/skips/suppressions; Canon031 reports 100% class docs and 94.9% contract-method docs.
+- Composer validate --strict --check-lock: GREEN.
+- Symfony YAML/container and Doctrine mapping/migration discovery were GREEN in the final Milestone 4 verification pass.
+- config/reference.php is a tracked Symfony auto-generated application configuration reference; its Composer/Flex regeneration after Doctrine installation is expected and retained.
+- Roadmap headings use explicit Milestone N naming rather than M1/M2 shorthand to avoid collision with orchestration budget notation.
