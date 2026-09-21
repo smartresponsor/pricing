@@ -23,7 +23,10 @@ final readonly class PriceSelectionCriteriaDTO
             throw new \InvalidArgumentException('Selection quantity must be at least one.');
         }
         foreach ($this->context as $name => $value) {
-            if ('' === trim((string) $name) || '' === trim($value)) {
+            if ('' === trim((string) $name)) {
+                throw new \InvalidArgumentException('Selection context names and values must not be empty.');
+            }
+            if ('' === trim($value)) {
                 throw new \InvalidArgumentException('Selection context names and values must not be empty.');
             }
         }

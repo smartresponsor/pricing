@@ -11,7 +11,7 @@ use App\Pricing\Entity\PriceHistoryEntity;
 use App\Pricing\Exception\PriceHistoryConflictException;
 use App\Pricing\Exception\PriceHistoryNotFoundException;
 use App\Pricing\RepositoryInterface\PriceHistoryRepositoryInterface;
-use App\Pricing\Service\PriceHistoryCodec;
+use App\Pricing\Service\PriceHistorySerializationService;
 use App\Pricing\Service\PriceHistoryService;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +22,7 @@ final class PriceHistoryServiceTest extends TestCase
     public function testCodecRoundTripPreservesRevisionSemantics(): void
     {
         $set = $this->priceSet();
-        $codec = new PriceHistoryCodec();
+        $codec = new PriceHistorySerializationService();
         $payload = $codec->encode($set);
         $restored = $codec->decode($payload);
 
@@ -41,7 +41,7 @@ final class PriceHistoryServiceTest extends TestCase
     public function testRecordIsIdempotentForIdenticalRevision(): void
     {
         $repository = new PriceHistoryMemoryRepository();
-        $service = new PriceHistoryService($repository, new PriceHistoryCodec());
+        $service = new PriceHistoryService($repository, new PriceHistorySerializationService());
         $set = $this->priceSet();
 
         $first = $service->record($set, new \DateTimeImmutable('2026-09-20T20:00:00+00:00'));
@@ -56,7 +56,7 @@ final class PriceHistoryServiceTest extends TestCase
     public function testRecordRejectsConflictingRevisionReuse(): void
     {
         $repository = new PriceHistoryMemoryRepository();
-        $service = new PriceHistoryService($repository, new PriceHistoryCodec());
+        $service = new PriceHistoryService($repository, new PriceHistorySerializationService());
         $service->record($this->priceSet());
 
         $changed = new PriceSetDTO(
@@ -73,7 +73,7 @@ final class PriceHistoryServiceTest extends TestCase
     /** Proves missing historical revisions fail explicitly instead of returning current pricing state. */
     public function testLoadRejectsMissingRevision(): void
     {
-        $service = new PriceHistoryService(new PriceHistoryMemoryRepository(), new PriceHistoryCodec());
+        $service = new PriceHistoryService(new PriceHistoryMemoryRepository(), new PriceHistorySerializationService());
 
         $this->expectException(PriceHistoryNotFoundException::class);
         $service->load('missing-set', 1);
@@ -83,7 +83,7 @@ final class PriceHistoryServiceTest extends TestCase
     public function testLoadRejectsPayloadIntegrityMismatch(): void
     {
         $repository = new PriceHistoryMemoryRepository();
-        $codec = new PriceHistoryCodec();
+        $codec = new PriceHistorySerializationService();
         $payload = $codec->encode($this->priceSet());
         $repository->records['set-history:7'] = new PriceHistoryEntity(
             'set-history',

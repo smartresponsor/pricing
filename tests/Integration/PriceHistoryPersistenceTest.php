@@ -9,7 +9,7 @@ use App\Pricing\DTO\PriceSetDTO;
 use App\Pricing\Entity\PriceHistoryEntity;
 use App\Pricing\Exception\PriceHistoryConflictException;
 use App\Pricing\Repository\PriceHistoryRepository;
-use App\Pricing\Service\PriceHistoryCodec;
+use App\Pricing\Service\PriceHistorySerializationService;
 use App\Pricing\Service\PriceHistoryService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -47,7 +47,7 @@ final class PriceHistoryPersistenceTest extends KernelTestCase
     {
         $repository = $this->entityManager->getRepository(PriceHistoryEntity::class);
         self::assertInstanceOf(PriceHistoryRepository::class, $repository);
-        $service = new PriceHistoryService($repository, new PriceHistoryCodec());
+        $service = new PriceHistoryService($repository, new PriceHistorySerializationService());
         $set = new PriceSetDTO(
             'persisted-set',
             'catalog:variant:1001',
@@ -69,7 +69,7 @@ final class PriceHistoryPersistenceTest extends KernelTestCase
     {
         $repository = $this->entityManager->getRepository(PriceHistoryEntity::class);
         self::assertInstanceOf(PriceHistoryRepository::class, $repository);
-        $codec = new PriceHistoryCodec();
+        $codec = new PriceHistorySerializationService();
         $set = new PriceSetDTO(
             'concurrent-set',
             'catalog:variant:1002',

@@ -17,7 +17,10 @@ final readonly class PriceCurrencyMetadataDTO
         if (1 !== preg_match('/^[A-Z]{3}$/', $this->currencyCode)) {
             throw new \InvalidArgumentException('Validated currency code must be an uppercase three-letter code.');
         }
-        if ($this->minorUnit < 0 || $this->minorUnit > 8) {
+        if ($this->minorUnit < 0) {
+            throw new \InvalidArgumentException('Currency minor unit must be between zero and eight.');
+        }
+        if ($this->minorUnit > 8) {
             throw new \InvalidArgumentException('Currency minor unit must be between zero and eight.');
         }
         if ($this->factor !== 10 ** $this->minorUnit) {

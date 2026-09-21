@@ -25,9 +25,13 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.95",
+    "gating/gate": "dev-master",
     "phpstan/phpstan": "^2.2",
     "phpunit/phpunit": "^13.3",
-    "gating/gate": "dev-master"
+    "symfony/browser-kit": "^8.1",
+    "symfony/css-selector": "^8.1",
+    "symfony/panther": "^2.4",
+    "symfony/test-pack": "^1.2"
   },
   "autoload": {
     "psr-4": {
@@ -129,18 +133,27 @@
   },
   "scripts": {
     "test": "phpunit",
+    "test:behavioral-coverage": "@php tool/price-behavioral-ui-coverage.php",
     "test:coverage": [
       "@php -r \"if (!is_dir('var/coverage')) { mkdir('var/coverage', 0777, true); }\"",
-      "@php -d xdebug.mode=coverage vendor/bin/phpunit --branch-coverage --coverage-text=var/coverage/summary.txt"
+      "@php -d xdebug.mode=coverage vendor/bin/phpunit --branch-coverage --coverage-text=var/coverage/summary.txt --coverage-clover=var/coverage/clover.xml"
     ],
     "phpstan": "phpstan analyse -c phpstan.neon",
     "cs:check": "php-cs-fixer fix --dry-run --diff --verbose",
     "cs:fix": "php-cs-fixer fix --verbose",
+    "schema:validate": "@php bin/console doctrine:schema:validate --skip-sync --env=test --no-interaction",
+    "schema:parity": [
+      "@php bin/console doctrine:migrations:migrate --env=test --no-interaction",
+      "@php tool/price-schema-parity.php",
+      "@php bin/console doctrine:migrations:up-to-date --env=test --no-interaction"
+    ],
     "gate": "@php vendor/bin/gating check --target=.",
     "quality": [
       "@test",
       "@phpstan",
       "@cs:check",
+      "@schema:parity",
+      "@test:behavioral-coverage",
       "@gate"
     ]
   },

@@ -9,7 +9,7 @@ use App\Pricing\DTO\PriceSetDTO;
 /**
  * Encodes immutable PriceSet revisions into stable persistence payloads and restores them.
  */
-interface PriceHistoryCodecInterface
+interface PriceHistorySerializationServiceInterface
 {
     /** @return array<string, mixed> */
     public function encode(PriceSetDTO $priceSet): array;

@@ -292,3 +292,47 @@ Pricing-local implementation, manifests, tests, static analysis, style, Symfony,
 - Doctrine migration discovery/status: GREEN, one available Pricing migration; the attempted schema-validation command was blocked by the execution safety layer before repository execution.
 - Standard Canon052 Gating entrypoint: BLOCKED by current Gating owner behavior. `vendor/bin/gating check --target=.` exits 2 because the clean Gating worktree still requires consumer `.gating/config/severity.yaml`, which conflicts with Canon052's artifact-only consumer `.gating/` contract. Pricing does not restore obsolete consumer policy as a workaround.
 - Git remote: none configured; push is not available from this repository.
+
+## 2026-09-21 — RC hardening and release-readiness pass
+
+### Baseline and canon mapping
+
+- Resumed from current Pricing worktree after the Canon052 owner-side Gating compatibility repair landed in the sibling Gating worktree.
+- Revalidated Canon023/024/043/045/052 package topology and Canon030/037/038/039/040/041/042 executable expectations against the current Pricing tree.
+- Preserved Pricing ownership: reusable price definitions, deterministic selection, immutable provenance/history/replay, and outbound quote contracts remain here; promotions, tax, FX, cart mutation, and order totals remain outside.
+- The prior Canon052 blocker is resolved: the standard consumer entrypoint now runs successfully with artifact-only consumer Gating state.
+- Git remote `origin` is now `git@github.com:smartresponsor/pricing.git`; fetch completed successfully before integration.
+
+### RC-critical implementation
+
+- Completed the pending Symfony/Doctrine hardening wave: canonical `price_doctrine.yaml` subject naming, test-specific SQLite configuration, schema-parity tooling, generated `config/reference.php` untracking/ignore contract, and robust `bin/console` environment/debug argument handling.
+- Replaced the non-canonical history `Codec` technical root with the Symfony-oriented `PriceHistorySerializationService` / `PriceHistorySerializationServiceInterface`; obsolete Codec roots are removed.
+- Added reproducible Canon042 behavioral/UI evidence generation. Pricing currently exposes no controller, route, template, or asset surface; the producer records an explicit empty denominator and fails if such surfaces appear without an evidence-contract update.
+- Added persistent Clover coverage output for deterministic method/branch diagnostics.
+- Removed the unreachable `price_list_missing` selector branch because `PriceSetDTO` rejects unknown list references at construction.
+- Simplified immutable validation structure without changing accepted states or exception semantics.
+- Added focused tests for persisted history serialization, DTO invariants, snapshot provenance, append-only concurrency races, entity persistence invariants, and deterministic list ranking.
+
+### Verification
+
+- Composer strict/check-lock validation: GREEN.
+- PHPUnit: GREEN, 45 tests / 183 assertions.
+- PHPStan: GREEN.
+- PHP-CS-Fixer: GREEN, 0 fixable files after repair.
+- Doctrine migration status: already at `App\\Pricing\\Migrations\\Version20260921031000`.
+- Doctrine schema parity: GREEN; ORM metadata matches the migrated test schema and migrations are up-to-date.
+- Canon040 PHP coverage: GREEN — lines 99.3%, methods 80.4%, branches 94.8%.
+- Canon041 browser/behavioral tooling: GREEN.
+- Canon042 behavioral/UI evidence: GREEN — current explicit inventories are 0/0 for functional, behavioral, UI, and critical surfaces because Pricing exposes none of those surfaces.
+- Canon052 Gating integration: GREEN.
+- Full Gating: GREEN, 68 rules, 0 failures, 0 warnings, 0 suppressions; 14 non-applicable/profile-dependent rules skipped.
+- Full `composer quality`: GREEN.
+
+### Growth work
+
+- Staged price/list publication and activation lifecycle remains a post-RC maturity capability, not a correctness prerequisite.
+- If Pricing later exposes routes or UI surfaces, the behavioral/UI evidence producer intentionally fails until explicit eligible and covered inventories are defined.
+
+### RC conclusion
+
+Pricing is locally RC-green. The remaining work in this pass is Git integration only: commit the coherent current hardening wave, verify a clean post-commit worktree, establish `master` upstream against `origin`, push, and inspect final branch state.

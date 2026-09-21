@@ -37,7 +37,10 @@ final class PriceHistoryEntity
         #[ORM\Column(name: 'recorded_at', type: 'datetime_immutable')]
         private readonly \DateTimeImmutable $recordedAt,
     ) {
-        if ('' === trim($this->priceSetId) || '' === trim($this->priceableReference)) {
+        if ('' === trim($this->priceSetId)) {
+            throw new \InvalidArgumentException('Price history identity and priceable reference must not be empty.');
+        }
+        if ('' === trim($this->priceableReference)) {
             throw new \InvalidArgumentException('Price history identity and priceable reference must not be empty.');
         }
         if ($this->revision < 1) {

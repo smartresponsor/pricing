@@ -4,7 +4,7 @@ services:
         autoconfigure: true
 
     App\Pricing\Repository\PriceHistoryRepository: ~
-    App\Pricing\Service\PriceHistoryCodec: ~
+    App\Pricing\Service\PriceHistorySerializationService: ~
     App\Pricing\Service\PriceHistoryService: ~
     App\Pricing\Service\PriceHistoricalSelectionService: ~
     App\Pricing\Service\PriceCurrencyValidationService: ~
@@ -16,8 +16,8 @@ services:
     App\Pricing\RepositoryInterface\PriceHistoryRepositoryInterface:
         alias: App\Pricing\Repository\PriceHistoryRepository
 
-    App\Pricing\ServiceInterface\PriceHistoryCodecInterface:
-        alias: App\Pricing\Service\PriceHistoryCodec
+    App\Pricing\ServiceInterface\PriceHistorySerializationServiceInterface:
+        alias: App\Pricing\Service\PriceHistorySerializationService
 
     App\Pricing\ServiceInterface\PriceHistoryServiceInterface:
         alias: App\Pricing\Service\PriceHistoryService

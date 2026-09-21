@@ -77,9 +77,6 @@ final class PriceSelectionService implements PriceSelectionServiceInterface
         }
 
         $list = $priceSet->priceList($price->priceListId);
-        if (null !== $price->priceListId && null === $list) {
-            return 'price_list_missing';
-        }
         if ($list instanceof PriceListDTO && !$list->isEffectiveAt($criteria->at)) {
             return 'price_list_inactive';
         }

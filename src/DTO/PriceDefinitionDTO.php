@@ -29,9 +29,15 @@ final readonly class PriceDefinitionDTO
         public bool $taxIncluded = false,
         public int $revision = 1,
     ) {
-        self::assertNonEmpty($this->id, 'Price id');
-        self::assertNonEmpty($this->priceSetId, 'Price set id');
-        self::assertNonEmpty($this->priceableReference, 'Priceable reference');
+        foreach ([
+            'Price id' => $this->id,
+            'Price set id' => $this->priceSetId,
+            'Priceable reference' => $this->priceableReference,
+        ] as $label => $value) {
+            if ('' === trim($value)) {
+                throw new \InvalidArgumentException($label.' must not be empty.');
+            }
+        }
 
         if (1 !== preg_match('/^[A-Z]{3}$/', $this->currencyCode)) {
             throw new \InvalidArgumentException('Currency code must be an uppercase three-letter code.');
@@ -54,7 +60,11 @@ final readonly class PriceDefinitionDTO
         if (null !== $this->startsAt && null !== $this->endsAt && $this->startsAt >= $this->endsAt) {
             throw new \InvalidArgumentException('Price effective window start must be before its end.');
         }
-        self::assertContext($this->context);
+        foreach ($this->context as $name => $value) {
+            if ('' === trim((string) $name) || '' === trim($value)) {
+                throw new \InvalidArgumentException('Price context names and values must not be empty.');
+            }
+        }
     }
 
     /** Determines whether this price is effective at the supplied instant. */
@@ -90,22 +100,5 @@ final readonly class PriceDefinitionDTO
     public function contextSpecificity(): int
     {
         return count($this->context);
-    }
-
-    private static function assertNonEmpty(string $value, string $label): void
-    {
-        if ('' === trim($value)) {
-            throw new \InvalidArgumentException($label.' must not be empty.');
-        }
-    }
-
-    /** @param array<string, string> $context */
-    private static function assertContext(array $context): void
-    {
-        foreach ($context as $name => $value) {
-            if ('' === trim((string) $name) || '' === trim($value)) {
-                throw new \InvalidArgumentException('Price context names and values must not be empty.');
-            }
-        }
     }
 }

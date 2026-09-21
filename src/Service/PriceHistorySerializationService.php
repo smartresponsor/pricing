@@ -7,12 +7,12 @@ namespace App\Pricing\Service;
 use App\Pricing\DTO\PriceDefinitionDTO;
 use App\Pricing\DTO\PriceListDTO;
 use App\Pricing\DTO\PriceSetDTO;
-use App\Pricing\ServiceInterface\PriceHistoryCodecInterface;
+use App\Pricing\ServiceInterface\PriceHistorySerializationServiceInterface;
 
 /**
  * Produces stable JSON-compatible PriceSet revision payloads and restores immutable DTOs.
  */
-final class PriceHistoryCodec implements PriceHistoryCodecInterface
+final class PriceHistorySerializationService implements PriceHistorySerializationServiceInterface
 {
     public function encode(PriceSetDTO $priceSet): array
     {

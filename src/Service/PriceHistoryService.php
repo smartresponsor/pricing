@@ -9,7 +9,7 @@ use App\Pricing\Entity\PriceHistoryEntity;
 use App\Pricing\Exception\PriceHistoryConflictException;
 use App\Pricing\Exception\PriceHistoryNotFoundException;
 use App\Pricing\RepositoryInterface\PriceHistoryRepositoryInterface;
-use App\Pricing\ServiceInterface\PriceHistoryCodecInterface;
+use App\Pricing\ServiceInterface\PriceHistorySerializationServiceInterface;
 use App\Pricing\ServiceInterface\PriceHistoryServiceInterface;
 
 /**
@@ -19,7 +19,7 @@ final class PriceHistoryService implements PriceHistoryServiceInterface
 {
     public function __construct(
         private PriceHistoryRepositoryInterface $repository,
-        private PriceHistoryCodecInterface $codec,
+        private PriceHistorySerializationServiceInterface $codec,
     ) {
     }
 
