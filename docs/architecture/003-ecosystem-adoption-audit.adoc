@@ -5,33 +5,35 @@ This document verifies how neighboring repositories currently consume or project
 
 == Cataloging
 
-Status: MIGRATION_REQUIRED_AT_CATALOGING_BOUNDARY.
+Status: ADOPTED_WITH_LEGACY_READ_MODEL_COMPATIBILITY.
 
 Evidence:
 
-* `CatalogRecordIndexEntity` still persists a nullable decimal `price` field and exposes it as float.
-* Cataloging's own capability audit states that Pricing remains an external reference and must not become an embedded engine.
+* Cataloging commit `9e42e087` adds `CatalogPriceableReferenceServiceInterface`/`CatalogPriceableReferenceService`, producing stable `catalog:record:<id>` Pricing-facing resource references.
+* Cataloging's full test suite passes with 207 tests / 791 assertions (1 pre-existing skip); container smoke and changed-file syntax/style checks pass.
+* `CatalogRecordIndexEntity` still persists a nullable decimal `price` read-model field; this remains compatibility debt and is not Pricing source of truth.
 
-Required adoption:
+Adoption result:
 
-* keep Cataloging resource identity as the source of the opaque `priceableReference`
-* replace authoritative local price semantics with a Pricing-derived projection/reference where commercial price is required
-* retain any denormalized price only as an explicitly derived read-model field, never as Pricing source of truth
+* Cataloging resource identity now explicitly supplies the opaque `priceableReference` required by Pricing.
+* Any retained decimal `price` field must remain a derived/legacy read-model projection rather than an authoritative reusable-price engine.
 
 == Retailing
 
-Status: MIGRATION_REQUIRED_AT_RETAILING_BOUNDARY.
+Status: ADOPTED_WITH_NEGOTIATED_PRICE_COMPATIBILITY.
 
 Evidence:
 
-* `RetailOrderIntentFactory` accepts `agreedAmountMinor`, reads local selection/pricing profiles, and formats the amount into an Ordering intent
-* Retailing's capability audit marks Price reference as PARTIAL and explicitly says to reference Pricing results rather than calculate prices locally
+* Retailing commit `4a6d2c39` adds the `pricing/price` dependency and teaches `RetailOrderIntentFactory` to consume typed `PriceQuoteDTO` facts.
+* Explicit negotiated `agreedAmountMinor` retains precedence over reusable Pricing quotes; this preserves Retailing-owned agreement semantics.
+* Quote identity and currency are validated against the selected retail service before an Ordering intent is emitted.
+* Retailing verification passes with 47 tests / 266 assertions, PHPStan and CS GREEN; canonical gate has only repository-level coverage/UI evidence warnings unrelated to this non-UI integration.
 
-Required adoption:
+Adoption result:
 
-* consume `PriceQuoteDTO` for reusable selected-price facts
-* preserve separately negotiated/agreed vendor-response pricing as Retailing-owned commercial agreement where it is not a reusable catalog price
-* stop treating local fixed pricing profiles as an alternative reusable-price engine when Pricing can provide the selected price
+* reusable selected prices now flow through Pricing `PriceQuoteDTO`.
+* negotiated vendor-response pricing remains a separate Retailing-owned commercial agreement.
+* legacy local fixed-price fallback remains compatibility debt and can be retired independently without blocking the Pricing integration contract.
 
 == Carting
 
@@ -52,23 +54,22 @@ No Pricing repository change is required for this boundary.
 
 == Ordering
 
-Status: MIGRATION_REQUIRED_AT_ORDERING_BOUNDARY.
+Status: ADOPTED_WITH_LEGACY_CALCULATOR_COMPATIBILITY.
 
 Evidence:
 
-* Ordering owns committed monetary snapshots and an `OrderPriceAuditEntity`
-* Ordering still exposes legacy/local pricing calculator service surfaces
-* Ordering's capability audit correctly states that committed order owns snapshots, not upstream calculation engines
+* Ordering commit `5a263146` persists an Ordering-owned serialization of `PriceSelectionSnapshotDTO` inside the existing `OrderPriceAuditEntity.payload` JSON field; no schema migration is required.
+* Pricing provenance is now part of Ordering's canonical fast suite: 15 tests / 89 assertions; PHPStan, CS and Composer validation are GREEN.
+* Ordering still exposes legacy/local pricing calculator service surfaces for existing total/tax/promotion/FX workflows.
 
-Required adoption:
+Adoption result:
 
-* persist Pricing `PriceSelectionSnapshotDTO` provenance (or an Ordering-owned serialization of the same facts) beside committed selected prices
-* preserve Ordering total/snapshot ownership
-* retire or narrow local reusable-price selection/calculation paths that duplicate Pricing ownership
-* continue keeping tax, promotion, FX, payment, and shipping execution in their owning components
+* committed orders can now retain exact Pricing selection provenance beside Ordering-owned monetary snapshots.
+* legacy calculator retirement/narrowing is compatibility cleanup, not a missing Pricing integration seam.
+* tax, promotion, FX, payment, shipping and order-total ownership remain outside Pricing.
 
 == Cross-component conclusion
 
-Pricing now exposes the required canonical producer-side contracts. Remaining code migrations are intentionally located in Cataloging, Retailing, and Ordering; Carting already exposes a compatible producer-consumer seam.
+The required cross-component Pricing integration seams are now implemented: Cataloging supplies stable priceable references, Retailing consumes typed Pricing quotes, Carting already exposes a compatible typed producer-consumer seam, and Ordering persists selected-price provenance.
 
-Those migrations must be executed in the owning repositories so their own Canonization, persistence migrations, tests, and release gates remain authoritative. Cross-repository writes from Pricing would violate component ownership.
+Remaining decimal/fixed/calculator paths are explicitly legacy compatibility surfaces in their owning repositories. Their later retirement must remain owner-local and does not require expanding Pricing ownership.

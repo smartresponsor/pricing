@@ -207,3 +207,20 @@ Milestones 1-3 are implemented and verified. Milestone 4 originally remained ope
 
 - Pricing itself requires no additional cross-repository code to expose the canonical producer contract.
 - Remaining Cataloging/Retailing/Ordering adoption must be implemented and gated inside those owning repositories; modifying them from Pricing would violate component ownership.
+
+## 2026-09-21 — Cross-repository adoption implementation pass
+
+### Implemented in owning repositories
+
+- Cataloging commit `9e42e087`: added the stable `CatalogPriceableReferenceServiceInterface` / `CatalogPriceableReferenceService` contract and DI wiring, producing `catalog:record:<id>` references. Verification: 207 tests / 791 assertions with 1 pre-existing skip, container smoke GREEN, changed-file syntax/style GREEN; repository-wide PHPStan remains blocked by an unrelated pre-existing syndication interface diagnostic.
+- Retailing commit `4a6d2c39`: added the Pricing dependency closure and typed `PriceQuoteDTO` consumption in `RetailOrderIntentFactory`. Explicit negotiated amounts retain precedence; quote resource/currency are validated. Verification: 47 tests / 266 assertions, PHPStan GREEN, CS GREEN, Composer strict/check-lock GREEN. Gate has no failures and only existing coverage/UI-evidence warnings.
+- Ordering commit `5a263146`: added Pricing/Currencing dependency closure and Ordering-owned persistence of `PriceSelectionSnapshotDTO` provenance inside `OrderPriceAuditEntity.payload`, with the regression test added to the canonical fast suite. Verification: 15 tests / 89 assertions, PHPStan GREEN, CS GREEN, Composer strict GREEN.
+- Carting already exposes `CartPriceEstimateDTO` and `CartPriceEstimateProviderInterface` as a typed external-pricing producer seam; no Carting mutation was required.
+
+### Cross-app conclusion
+
+- Cataloging links priceable resources explicitly.
+- Retailing consumes selected reusable Pricing quotes while preserving negotiated-price ownership.
+- Carting has the required typed producer-consumer boundary for host integration.
+- Ordering snapshots selected price provenance.
+- The Pricing Milestone 4 cross-app completeness requirement is therefore satisfied. Remaining local decimal/fixed/calculator paths are legacy compatibility cleanup in their owning repositories, not missing Pricing integration.
