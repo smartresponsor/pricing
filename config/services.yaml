@@ -1,0 +1,6 @@
+services:
+    App\Pricing\Service\PriceSelectionService: ~
+
+    App\Pricing\ServiceInterface\PriceSelectionServiceInterface:
+        alias: App\Pricing\Service\PriceSelectionService
+

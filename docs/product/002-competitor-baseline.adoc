@@ -1,0 +1,24 @@
+= Pricing Competitor Baseline
+
+This document defines the evidence model for the later feature-by-feature comparison. It does not assign unsupported benchmark results during skeleton materialization.
+
+== Comparison set
+
+* Medusa v2
+* Vendure
+* Sylius
+
+== Row classification
+
+AHEAD, PARITY, PARTIAL, MISSING, or NOT_APPLICABLE.
+
+== Evidence required per row
+
+* local owning repository
+* local implementation, test, or documentation evidence
+* competitor capability
+* competitor evidence
+* boundary decision
+* implementation priority
+* duplication risk
+

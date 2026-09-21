@@ -1,0 +1,32 @@
+= Product Capability Audit: Pricing
+:revdate: 2026-09-20
+
+== Boundary verdict
+
+Pricing now implements reusable price definitions and deterministic price selection through immutable contracts and a selection service. It does not own promotion, tax calculation, currency conversion, payment execution, or order totals.
+
+== Capability matrix
+
+[cols="3,1,4",options="header"]
+|===
+|Capability |Status |Audit
+|Price/PriceSet identity |IMPLEMENTED |Immutable PriceDefinitionDTO and PriceSetDTO enforce identity and external priceable-reference invariants.
+|Price lists |IMPLEMENTED |PriceListDTO provides enabled lifecycle, priority, context and effective-window semantics.
+|Multi-currency price definitions |IMPLEMENTED |Definitions carry canonical currency codes; supported-currency metadata and precision remain owned by Currencing, with no FX performed here.
+|Effective date windows |IMPLEMENTED |Price and price-list windows use inclusive-start/exclusive-end semantics.
+|Contextual price rules |IMPLEMENTED |Price- and list-level exact-match context rules support region/channel/customer-group style dimensions.
+|Best-price selection |IMPLEMENTED |PriceSelectionService applies stable ranking with an id tie-break for replayability.
+|Quantity/tier pricing |IMPLEMENTED |Minimum/maximum quantity invariants and tier specificity are part of selection.
+|Original/reference/effective semantics |IMPLEMENTED |Selected amount is distinct from optional referenceAmountMinor metadata; no promotion semantics are embedded.
+|Tax-inclusive metadata |IMPLEMENTED |Definitions preserve taxIncluded metadata while Taxating retains calculation ownership.
+|Selection explanation |IMPLEMENTED |Result exposes ordered candidate ids, stable rejection reasons, explanation and price-set revision.
+|History/versioning |PARTIAL |Price, list and set revisions are carried in immutable contracts; durable history persistence remains M4.
+|===
+
+== Milestone direction
+
+M1: IMPLEMENTED — PriceSet/Price/value/currency/effective-window invariants.
+M2: IMPLEMENTED — PriceList + contextual rules + deterministic selection result.
+M3: IMPLEMENTED — quantity tiers + reference/effective + tax-inclusion metadata.
+M4: PARTIAL — revision provenance exists; durable history and Cataloging/Retailing/Carting/Ordering integration remain.
+

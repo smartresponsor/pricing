@@ -1,0 +1,32 @@
+= Pricing Boundary
+
+== Purpose
+
+Pricing owns reusable price definitions and deterministic price selection independently of promotions, taxation, payments, and order totals.
+
+== Owns
+
+* price and price-set identity for external priceable resources
+* price lists
+* effective-date windows
+* multi-currency price definitions
+* contextual pricing rules
+* deterministic best-price selection
+* quantity and tier pricing
+* original/reference versus effective price semantics
+* tax-inclusive price metadata
+* price history
+* auditable selection explanations
+
+== Does not own
+
+* promotion eligibility, coupons, or campaigns; those belong to Promoting
+* tax calculation; that belongs to Taxating
+* currency registry or conversion; those belong to Currencing and Exchanging
+* payments; those belong to Paying
+* order aggregate totals; those belong to Ordering
+
+== Current implementation scope
+
+Pricing exposes immutable price, price-set, price-list, selection-criteria and selection-result contracts plus a deterministic selection service. Selection operates only on caller-provided reusable price definitions and performs no promotion evaluation, currency conversion, tax calculation, payment execution, or cart/order total aggregation.
+
