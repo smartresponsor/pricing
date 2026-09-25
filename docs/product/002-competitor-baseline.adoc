@@ -37,4 +37,4 @@ This benchmark records only capabilities supported by local evidence or current 
 
 == Boundary decision
 
-Pricing should continue closing auditability, durable history, and typed neighbor-consumption contracts rather than absorbing promotions, tax calculation, FX, or order-total logic. Competitor capability alone is not a reason to duplicate another SmartResponsor component's ownership.
+Pricing should continue closing auditability, durable history, and typed neighbor-consumption contracts rather than absorbing promotions, tax calculation, FX, or order-total logic. Competitor capability alone is not a reason to duplicate another platform component's ownership.

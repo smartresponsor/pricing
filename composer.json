@@ -1,6 +1,6 @@
 {
   "name": "pricing/price",
-  "description": "SmartResponsor Pricing component for reusable price definitions and deterministic price selection.",
+  "description": "Pricing component for reusable price definitions and deterministic price selection.",
   "type": "symfony-bundle",
   "license": "proprietary",
   "minimum-stability": "dev",

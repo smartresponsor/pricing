@@ -372,3 +372,64 @@ Pricing is locally RC-green.
 ### Growth work
 
 - Staged price/list publication and activation lifecycle remains post-RC growth work and is not required for Pricing correctness or operability.
+
+## 2026-09-25 — Autonomous RC reconvergence pass
+
+### Reconnaissance
+
+- Re-read the current Pricing README, Composer development/production manifests, Gating profile, product capability audit, boundary/integration documentation, source/test inventory, existing CMCP journal, Git status/diff, branch/upstream state, and Code Memory scope/graph plan.
+- Re-read the current mandatory Objecting, Cruding, Viewing, and Interfacing contracts and package manifests; Interfacing has no root MANIFEST.json.
+- Re-read current Canonization authority and the textual Canon007, Canon018, Canon020, Canon022, Canon023, Canon024, Canon043, Canon045, Canon052, Canon053, and Canon054 rules, plus current Gating owner contracts.
+- Market comparison against current Medusa and commercetools documentation confirms the existing RC boundary: price sets/lists, contextual selection, validity windows, quantity tiers, and deterministic price selection are baseline pricing-engine capabilities. Draft/active publishing workflow remains growth rather than an RC correctness prerequisite.
+
+### Baseline and target-to-canon mapping
+
+- Branch: master at 8a6f4a6c691b4be05cad2ff7c75e8b0b39bd23a8, equal to origin/master before this pass.
+- Pre-existing worktree changes are preserved: modified .gating/README.md and composer.json plus untracked LICENSE and NOTICE. The current composer.json change is the license transition to PolyForm-Noncommercial-1.0.0; no pre-existing file is reverted or overwritten by this pass.
+- Canon007/018/020: Pricing remains App\\Pricing\\ under src/ with Price* subject vocabulary and Symfony-oriented typed technical roots.
+- Canon022: standalone dependency baseline is declared directly, including Objecting, Cruding, Collectioning, Tabling, Viewing, Interfacing, and EasyAdmin.
+- Canon023/043/045: allowed development helper dependencies use symlinked path repositories with exact dev-master identities and root repository closure.
+- Canon024: production manifest remains package/VCS based and contains no sibling path/symlink repositories.
+- Canon052: Gating remains a dev dependency with the standard gate entrypoint and artifact-only consumer .gating boundary.
+- Canon053: Pricing exposes only allowed helper sibling symlinks; Currencing remains package/VCS-resolved rather than a sibling capability symlink.
+- Canon054: Pricing owns Doctrine persistence and retains underscore_number_aware naming strategy plus deterministic lower_snake_case current physical identifiers.
+- Cruding boundary remains zero generic CRUD controllers/routes inside Pricing. Viewing/Interfacing remain dependencies rather than Pricing-owned UI/shell implementations.
+
+### Selected RC-critical workstream
+
+- Re-run the deterministic release gates against the current dependency/canon state and repair only evidence-backed Pricing-owned failures.
+- Preserve the existing pricing implementation and ownership boundary; do not add speculative pricing features during RC convergence.
+- Confirm behavioral/UI evidence remains explicitly empty only while Pricing exposes no route/controller/template/asset user surface.
+
+### Growth workstream
+
+- Post-RC: consider explicit staged/draft/active price-list publication and activation lifecycle if product requirements require operator workflows.
+- Keep promotion evaluation, tax calculation, FX, payment execution, cart mutation, and order totals outside Pricing.
+
+### Risks and gates
+
+- The worktree contains pre-existing licensing/Gating-artifact changes, so any integration must separate new RC work from those changes unless they are independently verified and explicitly part of the final accepted change set.
+- Required gates: Composer strict/check-lock validation, PHPUnit, PHPStan, CS dry-run, Doctrine schema parity/migration state, behavioral-coverage evidence, standard and strict Gating, Symfony container/YAML checks where exposed, runtime applicability check, and final Git branch/worktree inspection.
+
+### Verification result
+
+- Composer validate --strict --check-lock: GREEN.
+- Composer audit: GREEN; no known security advisories.
+- PHPUnit: GREEN, 45 tests / 183 assertions.
+- Coverage execution: GREEN; lines 99.25% (398/401), methods 80.35% (45/56), branches 94.84% (405/427).
+- PHPStan level 8: GREEN.
+- PHP-CS-Fixer dry-run: GREEN, 0/44 fixable files.
+- Doctrine schema parity: GREEN; already at App\\Pricing\\Migrations\\Version20260921031000 and no pending migrations.
+- Behavioral/UI evidence producer: GREEN with explicit empty functional/behavioral/UI/critical denominators; Gating inventory confirms zero controller files and zero route-config files.
+- Standard Gating: GREEN, 0 failures/warnings/suppressions/skips.
+- Strict Gating: GREEN, 0 failures/warnings/suppressions; route-only checks are non-applicable because Pricing exposes no routes.
+- Symfony YAML lint: GREEN, 7 files. Symfony container lint: GREEN.
+- Managed PHP web-runtime probe: NOT_APPLICABLE because Pricing has no public/ directory; no runtime was started or restarted.
+- No browser/mobile/UI surface changed, so Panther/Playwright execution and screenshots are not applicable to this pass.
+
+### RC implementation
+
+- Remediated new Canon055 terminology drift in README.md, composer.json, composer.prod.json, and docs/product/002-competitor-baseline.adoc by replacing umbrella consumer branding with neutral component/platform vocabulary.
+- No pricing API, persistence mapping, selection behavior, route, controller, template, asset, or user flow changed.
+
+
