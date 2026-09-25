@@ -105,14 +105,9 @@
       }
     },
     {
-      "type": "path",
-      "url": "../Currencing",
-      "options": {
-        "symlink": true,
-        "versions": {
-          "currencing/currency": "dev-master"
-        }
-      }
+      "type": "vcs",
+      "url": "git@github.com:smartresponsor/currencing.git",
+      "no-api": true
     },
     {
       "type": "path",
@@ -147,7 +142,8 @@
       "@php tool/price-schema-parity.php",
       "@php bin/console doctrine:migrations:up-to-date --env=test --no-interaction"
     ],
-    "gate": "@php vendor/bin/gating check --target=.",
+    "gate": "@php vendor/bin/gating check --target=. --profile=config/price_gating_profile.yaml --policy-root=vendor/gating/gate/.gating --severity-config=vendor/gating/gate/.gating/config/severity.yaml",
+    "gate:strict": "@php vendor/bin/gating check --target=. --profile=config/price_gating_profile.yaml --policy-root=vendor/gating/gate/.gating --severity-config=vendor/gating/gate/.gating/config/severity.yaml --rule-set=vendor/gating/gate/.gating/profile/rule-set/strict.yaml",
     "quality": [
       "@test",
       "@phpstan",

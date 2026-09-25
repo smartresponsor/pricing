@@ -343,3 +343,32 @@ Pricing is locally RC-green.
 - Post-commit worktree was clean.
 - `master` was pushed to `git@github.com:smartresponsor/pricing.git` and configured to track `origin/master`.
 - Final acceptance requires only this journal synchronization commit and a clean/equal post-push branch check.
+
+## 2026-09-24 — Canon053/054 RC convergence pass
+
+### Reconnaissance and canon mapping
+
+- Re-read current Canonization authority, including Canon018, Canon019, Canon022, Canon052, Canon053, and Canon054, plus current Gating executable sources and mandatory Objecting/Cruding/Viewing/Interfacing contracts.
+- Canon053 applies to Pricing and prohibits the Currencing sibling Composer symlink; Currencing remains a real runtime dependency but must resolve through package/VCS distribution.
+- Canon054 applies because Pricing owns Doctrine ORM persistence; standalone ORM configuration must use doctrine.orm.naming_strategy.underscore_number_aware. Existing PriceHistory physical identifiers are already deterministic lower_snake_case.
+- Canon052 requires consumer-local .gating to remain artifact-only and executable policy to come from gating/gate. Pricing now has an explicit Symfony config component profile and Composer-installed policy-root wiring.
+
+### RC-critical implementation
+
+- Replaced the prohibited ../Currencing path/symlink repository with the canonical Currencing Git VCS repository while retaining currencing/currency dev-master as a direct runtime dependency.
+- Added the Doctrine underscore-number-aware naming strategy.
+- Added config/price_gating_profile.yaml and explicit standard/strict Gating scripts using vendor/gating/gate policy/config surfaces.
+- Added /.gating/ to .gitignore so generated consumer artifact state does not pollute Git status. Existing concurrent .gating/README.md and root LICENSE/NOTICE changes were preserved and excluded from this work.
+- Composer lock was refreshed so Currencing is installed from its repository archive rather than a sibling symlink; the pre-existing symfony/test-pack dependency was preserved.
+
+### Verification
+
+- composer validate --strict --check-lock: GREEN.
+- composer quality: GREEN; PHPUnit 45 tests / 183 assertions, PHPStan GREEN, PHP-CS-Fixer GREEN, schema parity GREEN, migrations up-to-date, behavioral coverage GREEN, standard Gating GREEN.
+- composer gate:strict: GREEN; 13 rules, 0 failures, 0 warnings, 2 route-only non-applicable skips.
+- Canon053 target mapping verified directly: remaining sibling symlink repositories are canonical exceptions; Currencing is VCS/package-resolved.
+- Canon054 target mapping verified directly: standalone naming strategy is configured and current PriceHistory table/index/unique-constraint identifiers are lower_snake_case.
+
+### Growth work
+
+- Staged price/list publication and activation lifecycle remains post-RC growth work and is not required for Pricing correctness or operability.
