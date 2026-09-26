@@ -19,7 +19,10 @@
 | Canon032 | `PricingBundle` is registered in standalone `config/bundles.php`.
 | Canon033 | Development and production manifests share package/type/PSR-4/PHP/Symfony identity.
 | Canon034 | `.gitignore` covers dependency, runtime, local environment, quality cache, IDE, OS, and Node noise.
+| Canon037 | Generated `config/reference.php` is ignored and remains untracked; authoritative configuration stays in `config/packages/*`, `config/services.yaml`, and source.
 | Canon039 | PHPUnit dependency/config/scripts include `src/`, branch coverage, and persistent text summary.
 | Canon043 | Local sibling dependencies are pinned to exact `dev-master` with path repository version identity.
+| Canon052 | Gating is a development dependency, `quality` includes `@gate`, and consumer `.gating/` remains artifact-only.
+| Canon053 | Pricing exposes symlinked sibling repositories only for canonical helper exceptions; capability dependencies such as Currencing resolve through package/VCS metadata.
 |===
 

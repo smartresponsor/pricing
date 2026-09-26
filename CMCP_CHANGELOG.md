@@ -433,3 +433,51 @@ Pricing is locally RC-green.
 - No pricing API, persistence mapping, selection behavior, route, controller, template, asset, or user flow changed.
 
 
+
+
+## 2026-09-26 — Canon037/Canon052 RC hardening pass
+
+### Reconnaissance and market baseline
+
+- Read the authoritative task specification in full, resolved the canonical Pricing workspace through Console MCP, and inspected Git/worktree, source, tests, config, scripts, CI/gating surfaces, Code Memory plan, documentation, and current RC diagnostics.
+- Re-read mandatory Objecting, Cruding, Viewing, Interfacing, Gating, and Canonization contracts relevant to Pricing. Consulted textual Canon023, Canon024, Canon037, Canon043, Canon045, Canon052, Canon053, and the current Architecture Guard Matrix; Canonization remained READ_ONLY.
+- Current Medusa documentation confirms mature baseline expectations already covered by Pricing: price sets/lists, multi-currency definitions, contextual rules, quantity tiers, validity windows, and best-price selection. Staged/operator publishing lifecycle remains growth work rather than an RC correctness blocker.
+
+### Baseline and canon mapping
+
+- Branch `master` at `e430a4ac803e58dd1949cb039c1aad0ec839d707`, initially equal to `origin/master`; pre-existing worktree state contained `.gating/README.md`, `composer.json`, `LICENSE`, and `NOTICE` changes.
+- Canon037: `config/reference.php` exists locally as generated/ignored output and has historical Git commits, but the guarded untrack probe confirmed it is absent from the current index. Canon037 is therefore already satisfied in current HEAD.
+- Canon052: consumer `.gating/` may contain artifacts and a boundary README only; the pre-existing README had drifted into a copy of Gating owner documentation and therefore no longer described the consumer artifact boundary.
+- Canon053: current Pricing sibling symlinks remain restricted to canonical helper exceptions; Currencing is package/VCS-resolved.
+
+### Selected RC-critical work
+
+- Verify Canon037 current-index state and leave the generated ignored `config/reference.php` untouched because it is already untracked.
+- Restore `.gating/README.md` to an explicit Pricing consumer artifact-only boundary.
+- Extend the Pricing canonization map with current Canon037/052/053 mappings; do not add speculative pricing functionality.
+
+### Growth work
+
+- Post-RC staged/draft/active price-list publication and operator UX remain optional maturity work. Promotion, tax, FX, payment, cart mutation, and order-total ownership stay outside Pricing.
+
+### Gates to run
+
+- Composer strict/check-lock validation, PHPUnit/coverage, PHPStan, PHP-CS-Fixer dry-run, Doctrine schema parity, behavioral evidence, standard/strict Gating, Symfony YAML/container lint, managed-runtime applicability probe, final Git status/diff, and safe publication when authorized.
+
+
+### Verification result
+
+- Composer validate --strict --check-lock: GREEN.
+- Composer audit: GREEN; no known security vulnerability advisories.
+- `composer quality`: GREEN; PHPUnit 45 tests / 183 assertions, PHPStan GREEN, PHP-CS-Fixer GREEN, Doctrine schema parity GREEN, migrations up-to-date, behavioral/UI evidence GREEN, standard Gating 0 failures/warnings.
+- Coverage: lines 99.25% (398/401), methods 80.35% (45/56), branches 94.84% (405/427).
+- Strict Gating: GREEN; 14 rules, 0 failed, 0 warnings, 2 route-only non-applicable skips.
+- Symfony YAML lint: GREEN, 7 files. Symfony container lint: GREEN.
+- Managed PHP runtime probe: NOT_APPLICABLE because no `public/` directory exists; no runtime was started or restarted.
+- No browser/mobile/UI/navigation/form surface changed, so Panther/Playwright execution and visual screenshots are NOT_APPLICABLE for this pass.
+
+### Material checkpoint
+
+- Canon052 consumer artifact ownership is restored and documented; current Canon037/052/053 mappings are explicit in the Pricing architecture map.
+- Pricing business behavior and ownership boundaries were intentionally unchanged; staged price publication remains growth work.
+- Pre-existing licensing work in `composer.json`, `LICENSE`, and `NOTICE` remains outside this RC commit unless separately integrated.
