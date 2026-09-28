@@ -13,4 +13,5 @@ node_modules/
 /.env.*.local
 /config/reference.php
 /.gating/
+/.console-mcp/
 

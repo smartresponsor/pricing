@@ -481,3 +481,57 @@ Pricing is locally RC-green.
 - Canon052 consumer artifact ownership is restored and documented; current Canon037/052/053 mappings are explicit in the Pricing architecture map.
 - Pricing business behavior and ownership boundaries were intentionally unchanged; staged price publication remains growth work.
 - Pre-existing licensing work in `composer.json`, `LICENSE`, and `NOTICE` remains outside this RC commit unless separately integrated.
+
+## 2026-09-28 — Canon022/045/052 reconvergence
+
+### Reconnaissance
+
+- Consumed upstream CanonScanning evidence for fingerprint `a53d38063f06b68bd5753aa1a4d13ca0d898c716ce5e2218d834f112edc21218`: Gating reported Canon022, Canon045, and Canon052 failures; fresh Inspecting evidence contained two medium constructor-complexity observations.
+- Re-read current textual Canon022, Canon045, and Canon052 rules from Canonization plus the executable Canon052 mirror from Gating.
+- Re-read Pricing manifests, bundle registration, boundary documentation, current Git diff, and mandatory Objecting/Cruding/Viewing/Interfacing contracts.
+- Current Medusa documentation confirms quantity tiers, contextual rules, validity windows, price lists, multi-currency definitions, and deterministic selection as mature pricing expectations already represented by Pricing; staged publishing remains growth work.
+
+### Target-to-canon mapping
+
+- Canon022: standalone Pricing directly requires `failing/failure` in development and production and registers `App\\Failing\\FailingBundle`.
+- Canon045: root development Composer exposes `../Failing` as a symlinked `dev-master` path repository so the local first-party dependency closure is complete.
+- Canon052: consumer `.gating/` is artifact-only; its README documents that boundary and executable policy remains owned by `gating/gate`.
+
+### RC-critical implementation
+
+- Added Failing to development and production runtime dependency manifests.
+- Added canonical local Failing repository wiring in development and packaged VCS metadata in production.
+- Registered the Failing Symfony bundle.
+- Restored the Pricing consumer `.gating/README.md` boundary text.
+
+### Growth work
+
+- DTO constructor-complexity findings remain non-blocking refactoring candidates unless promoted by an executable gate.
+- Staged/draft/active price-list publication remains post-RC maturity work.
+
+### Gates to run
+
+Composer strict/check-lock validation and dependency reconciliation; PHPUnit; coverage; PHPStan; PHP-CS-Fixer; Doctrine/schema parity; behavioral evidence; standard/strict Gating; Symfony YAML/container checks; refreshed Inspecting after mutation where applicable; final Git status/branch/upstream inspection.
+
+### Verification result
+
+- `composer validate --strict --check-lock`: GREEN.
+- Composer audit: GREEN; no security vulnerability advisories.
+- PHPUnit: GREEN, 45 tests / 183 assertions.
+- Coverage: GREEN — lines 99.25% (398/401), methods 80.35% (45/56), branches 94.84% (405/427).
+- PHPStan: GREEN, no errors.
+- PHP-CS-Fixer dry-run: GREEN, 0/44 fixable.
+- Doctrine schema parity: GREEN; already at `App\\Pricing\\Migrations\\Version20260921031000`, ORM schema matches, no pending migrations.
+- Behavioral/UI evidence producer: GREEN; Pricing still exposes no controller/route/template/asset user surface.
+- Standard Gating: GREEN, 0 failures/warnings/suppressions/skips. Strict Gating: GREEN, 0 failures/warnings/suppressions with two route-only non-applicable skips.
+- Symfony YAML lint: GREEN, 7 files. Container lint: GREEN.
+- `git diff --check`: GREEN.
+- The copied Gating engine/policy payload previously found under consumer `.gating/` was moved non-destructively into ignored `var/cmcp-gating-quarantine-20260928-*` paths; source bytes were preserved and `.gating/` no longer contains the 24 disallowed top-level entries from the RED evidence.
+- Fresh Inspecting evidence remains applicable to the unchanged DTO source scope: two medium constructor-complexity observations remain informational; no source mutation was made in those files, so duplicate pre-remediation Inspecting analysis was not required.
+- No browser/mobile/UI surface changed; Panther/Playwright screenshots and runtime restart are not applicable.
+
+### Integration classification
+
+- The pre-existing `composer.json` license transition plus `LICENSE` and `NOTICE` form one coherent PolyForm Noncommercial release-metadata change. Because `composer.json` also carries the required Failing dependency remediation, these files are integrated together rather than partially staging one file hunk and leaving inconsistent license metadata.
+- Final fetch reports `master` equal to `origin/master` before commit; no reconciliation blocker exists.
+

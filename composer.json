@@ -2,7 +2,7 @@
   "name": "pricing/price",
   "description": "Pricing component for reusable price definitions and deterministic price selection.",
   "type": "symfony-bundle",
-  "license": "proprietary",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
@@ -10,6 +10,7 @@
     "collectioning/collection": "dev-master",
     "cruding/crud": "dev-master",
     "currencing/currency": "dev-master",
+    "failing/failure": "dev-master",
     "doctrine/dbal": "^4.4",
     "doctrine/doctrine-bundle": "^3.2",
     "doctrine/doctrine-migrations-bundle": "^4.0",
@@ -101,6 +102,16 @@
         "symlink": true,
         "versions": {
           "interfacing/interface": "dev-master"
+        }
+      }
+    },
+    {
+      "type": "path",
+      "url": "../Failing",
+      "options": {
+        "symlink": true,
+        "versions": {
+          "failing/failure": "dev-master"
         }
       }
     },
