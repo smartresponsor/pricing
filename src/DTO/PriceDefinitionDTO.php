@@ -29,38 +29,59 @@ final readonly class PriceDefinitionDTO
         public bool $taxIncluded = false,
         public int $revision = 1,
     ) {
-        foreach ([
-            'Price id' => $this->id,
-            'Price set id' => $this->priceSetId,
-            'Priceable reference' => $this->priceableReference,
-        ] as $label => $value) {
+        self::assertIdentity($this->id, $this->priceSetId, $this->priceableReference);
+        self::assertCurrencyAndAmounts($this->currencyCode, $this->amountMinor, $this->referenceAmountMinor);
+        self::assertQuantityTier($this->minimumQuantity, $this->maximumQuantity);
+        self::assertRevisionAndWindow($this->revision, $this->startsAt, $this->endsAt);
+        self::assertContext($this->context);
+    }
+
+    private static function assertIdentity(string $id, string $priceSetId, string $priceableReference): void
+    {
+        foreach (['Price id' => $id, 'Price set id' => $priceSetId, 'Priceable reference' => $priceableReference] as $label => $value) {
             if ('' === trim($value)) {
                 throw new \InvalidArgumentException($label.' must not be empty.');
             }
         }
+    }
 
-        if (1 !== preg_match('/^[A-Z]{3}$/', $this->currencyCode)) {
+    private static function assertCurrencyAndAmounts(string $currencyCode, int $amountMinor, ?int $referenceAmountMinor): void
+    {
+        if (1 !== preg_match('/^[A-Z]{3}$/', $currencyCode)) {
             throw new \InvalidArgumentException('Currency code must be an uppercase three-letter code.');
         }
-        if ($this->amountMinor < 0) {
+        if ($amountMinor < 0) {
             throw new \InvalidArgumentException('Price amount must not be negative.');
         }
-        if ($this->minimumQuantity < 1) {
-            throw new \InvalidArgumentException('Minimum quantity must be at least one.');
-        }
-        if (null !== $this->maximumQuantity && $this->maximumQuantity < $this->minimumQuantity) {
-            throw new \InvalidArgumentException('Maximum quantity must be greater than or equal to minimum quantity.');
-        }
-        if (null !== $this->referenceAmountMinor && $this->referenceAmountMinor < 0) {
+        if (null !== $referenceAmountMinor && $referenceAmountMinor < 0) {
             throw new \InvalidArgumentException('Reference amount must not be negative.');
         }
-        if ($this->revision < 1) {
+    }
+
+    private static function assertQuantityTier(int $minimumQuantity, ?int $maximumQuantity): void
+    {
+        if ($minimumQuantity < 1) {
+            throw new \InvalidArgumentException('Minimum quantity must be at least one.');
+        }
+        if (null !== $maximumQuantity && $maximumQuantity < $minimumQuantity) {
+            throw new \InvalidArgumentException('Maximum quantity must be greater than or equal to minimum quantity.');
+        }
+    }
+
+    private static function assertRevisionAndWindow(int $revision, ?\DateTimeImmutable $startsAt, ?\DateTimeImmutable $endsAt): void
+    {
+        if ($revision < 1) {
             throw new \InvalidArgumentException('Price revision must be at least one.');
         }
-        if (null !== $this->startsAt && null !== $this->endsAt && $this->startsAt >= $this->endsAt) {
+        if (null !== $startsAt && null !== $endsAt && $startsAt >= $endsAt) {
             throw new \InvalidArgumentException('Price effective window start must be before its end.');
         }
-        foreach ($this->context as $name => $value) {
+    }
+
+    /** @param array<string, string> $context */
+    private static function assertContext(array $context): void
+    {
+        foreach ($context as $name => $value) {
             if ('' === trim((string) $name) || '' === trim($value)) {
                 throw new \InvalidArgumentException('Price context names and values must not be empty.');
             }

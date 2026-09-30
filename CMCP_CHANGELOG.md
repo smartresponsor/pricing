@@ -535,3 +535,38 @@ Composer strict/check-lock validation and dependency reconciliation; PHPUnit; co
 - The pre-existing `composer.json` license transition plus `LICENSE` and `NOTICE` form one coherent PolyForm Noncommercial release-metadata change. Because `composer.json` also carries the required Failing dependency remediation, these files are integrated together rather than partially staging one file hunk and leaving inconsistent license metadata.
 - Final fetch reports `master` equal to `origin/master` before commit; no reconciliation blocker exists.
 
+## 2026-09-29 — Inspecting complexity hardening
+
+### Reconnaissance and market baseline
+
+- Consumed the supplied CanonScanning RED and fresh Inspecting evidence before re-running any verifier. The supplied canon report identified Canon052 consumer .gating contamination, while the supplied Inspecting report identified two medium constructor-complexity findings.
+- Re-read Pricing boundary, canonization map, competitor baseline, development/production Composer manifests, Gating profile, and invariant tests.
+- Re-read Canonization authority including Canon052 and current Objecting, Cruding, Viewing, Interfacing, and Gating contracts.
+- Current official Medusa and commercetools documentation continues to support multi-currency price sets, contextual pricing rules, validity windows, quantity tiers, and deterministic selection as mature baseline expectations. Pricing already implements these within its declared boundary.
+
+### Current canon state
+
+- Current composer gate and composer gate:strict are GREEN; the earlier Canon052 RED is not reproducible with the current local Gating package/policy.
+- The pre-existing .gating/README.md worktree modification was preserved and not staged or overwritten.
+- No destructive .gating cleanup was attempted.
+
+### RC-critical implementation
+
+- Refactored PriceDefinitionDTO constructor validation into focused private invariant methods.
+- Refactored PriceSelectionSnapshotDTO constructor validation into focused private invariant methods.
+- Public constructor signatures, exception messages, accepted/rejected states, pricing semantics, and persistence contracts remain unchanged.
+
+### Verification
+
+- Changed-file PHP syntax lint: GREEN, 2/2 files.
+- composer quality: GREEN — PHPUnit 45 tests / 183 assertions, PHPStan 0 errors, PHP-CS-Fixer 0 fixable files, Doctrine schema parity GREEN, migrations up-to-date, behavioral coverage GREEN, standard Gating GREEN.
+- composer gate:strict: GREEN — 14 rules, 0 failed, 0 warnings, 2 route-only non-applicable skips.
+- Post-mutation Inspecting: GREEN — 0 findings; php-structure maximum cyclomatic complexity reduced from 18 to 12 and PHPStan analyzer reports 0 errors.
+- No controller, route, template, asset, browser/mobile UI, navigation, or form behavior changed; Playwright/Panther execution and screenshots are not applicable.
+
+### Growth work
+
+- Richer pricing rule operators, operator/admin workflows, and additional observability remain post-RC opportunities only when they stay within Pricing ownership.
+- Promotions, tax calculation, FX conversion, payments, cart mutation, and order totals remain outside Pricing.
+
+
