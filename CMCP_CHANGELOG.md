@@ -657,4 +657,40 @@ Composer strict/check-lock validation and dependency reconciliation; PHPUnit; co
 - The historical Canon052 failure and constructor-complexity observations are closed on the current repository state.
 - No remaining Pricing-owned RC-critical source change is justified by current evidence.
 
+## 2026-10-03 — Engine task engine-20261003193434-pricing-ded5ff
+
+### Reconnaissance and market baseline
+
+- Resolved `D:\\PhpstormProjects\\www\\Pricing` through Console MCP and confirmed `master` at `363bdfa3160075c189c7e445cdd597ec3055cce7`, initially clean and equal to `origin/master`.
+- Consumed the supplied CanonScanning RED report for fingerprint `bf602cef7e760ac6548d09291dffbeac14efd945d591d9a9f7d34399cf66f79a`; its sole failure was historical Canon052 consumer `.gating/` contamination.
+- Re-read Pricing manifests/boundary/product evidence, current Canon052 textual authority, the Canonization guard matrix, current Gating owner contract, and mandatory Objecting/Cruding/Viewing/Interfacing dependency boundaries.
+- Current official Medusa and commercetools documentation continues to show multi-currency prices, price lists/scopes, contextual rules, quantity tiers, validity constraints, and deterministic/fallback price selection as mature baseline capabilities. Pricing already owns the relevant deterministic reusable-price subset; discounts/promotions, tax, payment and cart/order totals remain outside this component.
+
+### Target-to-canon mapping
+
+- Canon052: `gating/gate` is a dev dependency, development resolves the canonical sibling Gating package, production uses packaged/VCS metadata, `quality` includes the standard Gating entrypoint, and consumer `.gating/` remains artifact-only.
+- Canon021/Cruding boundary: Pricing exposes zero generic CRUD controllers and zero route configuration files.
+- Objecting/Viewing/Interfacing remain application dependencies; Pricing does not absorb their system-field, rendering, shell, or generic CRUD ownership.
+- Current Canonization has advanced beyond the supplied September scan; fresh local Gating and Inspecting evidence, rather than the stale RED, is the acceptance basis.
+
+### RC-critical workstream and verification
+
+- No new Pricing source remediation was justified: the historical Canon052 failure is not reproducible on the current repository.
+- `composer validate --strict --check-lock`: GREEN.
+- `composer audit --format=summary`: GREEN; no known security vulnerability advisories.
+- `composer quality`: GREEN — PHPUnit 45 tests / 183 assertions, PHPStan GREEN, PHP-CS-Fixer GREEN, Doctrine schema parity and migrations GREEN, behavioral/UI evidence GREEN, standard Gating GREEN.
+- `composer gate:strict`: GREEN — 14 rules, 0 failed, 0 warning, 0 suppressed, two route-only non-applicable skips.
+- Fresh Inspecting report `D:\\PhpstormProjects\\www\\Inspecting\\.inspecting\\reports\\D--PhpstormProjects-www-Pricing-20261003-195754.json`: GREEN, 0 findings; PHPStan analyzer 0 errors; php-structure max cyclomatic complexity 12.
+- Managed PHP runtime probe is NOT_APPLICABLE because Pricing has no `public/` directory; no runtime was started or restarted.
+- Pricing exposes no controller/route/template/asset/navigation/form/browser/mobile UI surface, so Panther/Playwright execution and screenshot evidence are NOT_APPLICABLE.
+
+### Growth workstream
+
+- Post-RC candidates remain staged/draft/active price-list publication, richer rule operators, and operator/admin workflow where product requirements justify them.
+- These growth items do not block RC and must not move promotion, tax, FX, payment, cart mutation, or order-total ownership into Pricing.
+
+### Acceptance
+
+- Current repository evidence is RC-green for the supplied canon remediation front; only this orchestration journal synchronization is introduced by this execution window.
+
 
