@@ -693,4 +693,40 @@ Composer strict/check-lock validation and dependency reconciliation; PHPUnit; co
 
 - Current repository evidence is RC-green for the supplied canon remediation front; only this orchestration journal synchronization is introduced by this execution window.
 
+## 2026-10-03 — Pricing RC verification continuation
+
+### Reconnaissance
+
+- Resolved the canonical Pricing workspace through Console MCP and confirmed a clean `master` worktree at `6ae249562727a58bea524447e996fd2c904511fa`, equal to `origin/master` at the start of this pass.
+- Consumed the supplied CanonScanning RED evidence for fingerprint `bf602cef7e760ac6548d09291dffbeac14efd945d591d9a9f7d34399cf66f79a`; its historical failure is Canon052 consumer `.gating/` contamination already closed by later repository work.
+- Re-read the current Pricing boundary, manifests, Gating profile, mandatory Objecting/Cruding/Viewing/Interfacing contracts, Gating owner contract, and Canonization textual Canon052 authority.
+- Current market baseline remains consistent with mature pricing engines: reusable price sets/lists, contextual/scoped selection, quantity tiers, validity windows, and deterministic best-price selection are baseline capabilities already represented by Pricing.
+
+### Target-to-canon mapping
+
+- Canon052: `gating/gate` remains the executable owner; Pricing consumes it through the development dependency and keeps consumer `.gating/` artifact-only.
+- Canon021: Pricing exposes no generic CRUD controller or route configuration; generic CRUD ownership stays in Cruding.
+- Objecting, Viewing, and Interfacing remain explicit dependencies and Pricing does not absorb their system-field, rendering, template, or shell responsibilities.
+
+### RC-critical verification
+
+- `composer validate --strict --check-lock`: GREEN.
+- `composer audit --format=summary`: GREEN; no security vulnerability advisories.
+- `composer gate:strict`: GREEN — 14 rules, 0 failed, 0 warnings/suppressions, two route-only non-applicable skips.
+- PHPUnit: GREEN — 45 tests / 183 assertions.
+- PHPStan: GREEN — 0 errors.
+- PHP-CS-Fixer dry-run: GREEN — 0/44 fixable files.
+- Fresh Inspecting report `D:\PhpstormProjects\www\Inspecting\.inspecting\reports\D--PhpstormProjects-www-Pricing-20261003-233828.json`: GREEN — 0 findings; PHPStan analyzer 0 errors; php-structure maximum cyclomatic complexity 12.
+- No Pricing source mutation was justified by current repository evidence; this pass changes only the orchestration journal.
+
+### Growth work
+
+- Staged/draft/active price-list publication, richer rule operators, and operator/admin workflow remain post-RC candidates only.
+- Promotion evaluation, tax calculation, FX conversion, payment execution, cart mutation, and order-total ownership remain outside Pricing.
+
+### Acceptance
+
+- The supplied historical Canon052 RED is not reproducible on the current repository state.
+- Current Pricing source and deterministic verification are RC-green; only journal integration remains in this execution window.
+
 
