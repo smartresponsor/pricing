@@ -569,4 +569,44 @@ Composer strict/check-lock validation and dependency reconciliation; PHPUnit; co
 - Richer pricing rule operators, operator/admin workflows, and additional observability remain post-RC opportunities only when they stay within Pricing ownership.
 - Promotions, tax calculation, FX conversion, payments, cart mutation, and order totals remain outside Pricing.
 
+## 2026-10-03 — Autonomous RC acceptance pass
+
+### Reconnaissance and market baseline
+
+- Read the authoritative engine specification, current Pricing documentation/manifests/source, mandatory Objecting/Cruding/Viewing/Interfacing contracts, current Gating owner contract, Canonization authority, and textual Canon052 rule.
+- Consumed upstream CanonScanning RED evidence for fingerprint `bf602cef7e760ac6548d09291dffbeac14efd945d591d9a9f7d34399cf66f79a` before re-running verifiers. The historical RED was Canon052 consumer `.gating/` contamination; the paired Inspecting evidence contained the two DTO constructor-complexity findings later remediated in the 2026-09-29 pass.
+- Current market baseline remains aligned with mature pricing engines: reusable price sets/lists, multi-currency definitions, contextual rules, quantity tiers, validity windows, and deterministic best-match selection are baseline expectations already covered by Pricing. Operator/admin staged publishing remains growth work rather than an RC correctness dependency.
+
+### Target-to-canon mapping
+
+- Canon052: `gating/gate` remains a development dependency, development uses the canonical sibling `../Gating` symlink, production uses packaged/VCS metadata, `quality` includes `@gate`, and executable policy remains owned by the installed Gating package rather than consumer `.gating/`.
+- Cruding boundary remains intact: Pricing exposes no generic CRUD controller or route surface.
+- Objecting/Viewing/Interfacing remain declared application dependencies and Pricing does not absorb their persistence, rendering, shell, or generic CRUD responsibilities.
+
+### RC-critical workstream
+
+- Re-verify the current repository against deterministic quality, schema, behavioral-evidence, Gating, security, and Inspecting gates rather than reintroducing obsolete consumer policy.
+- Preserve the pre-existing worktree deletion of `.gating/README.md`; it is not required by Canon052, which permits but does not require a non-executable boundary README.
+- Synchronize this CMCP journal with the current factual acceptance evidence only; no speculative Pricing capability or UI surface is added.
+
+### Growth workstream
+
+- Staged/draft/active price-list publication and operator/admin workflow remain post-RC maturity candidates.
+- Richer rule operators and observability may be added later only within Pricing ownership; promotions, tax calculation, FX, payments, cart mutation, and order totals remain outside this component.
+
+### Verification
+
+- `composer validate --strict --check-lock`: GREEN.
+- `composer audit`: GREEN; no known security vulnerability advisories.
+- `composer quality`: GREEN — PHPUnit 45 tests / 183 assertions, PHPStan GREEN, PHP-CS-Fixer GREEN, Doctrine schema parity and migrations GREEN, behavioral/UI evidence GREEN, standard Gating GREEN.
+- `composer gate:strict`: GREEN; 0 failures/warnings/suppressions with two route-only non-applicable skips.
+- Fresh Inspecting: GREEN — 0 findings; PHPStan analyzer 0 errors; php-structure maximum cyclomatic complexity 12.
+- Managed PHP runtime probe: NOT_APPLICABLE because Pricing has no `public/` directory; no runtime was started or restarted.
+- Pricing exposes no controller, route, template, asset, navigation, form, browser, or mobile UI surface in this pass, so Panther/Playwright execution and visual screenshots are NOT_APPLICABLE.
+
+### Acceptance checkpoint
+
+- The historical Canon052 RED and Inspecting complexity backlog are not reproducible on the current repository state.
+- No Pricing-owned source remediation remains justified by the supplied failure backlog or current deterministic gates.
+
 
