@@ -609,4 +609,52 @@ Composer strict/check-lock validation and dependency reconciliation; PHPUnit; co
 - The historical Canon052 RED and Inspecting complexity backlog are not reproducible on the current repository state.
 - No Pricing-owned source remediation remains justified by the supplied failure backlog or current deterministic gates.
 
+## 2026-10-03 — Engine acceptance and integration closure
+
+### Reconnaissance and authority
+
+- Re-read the authoritative engine task specification and current Pricing README, development/production Composer manifests, boundary document, Gating profile, source invariants, Git state, and the supplied CanonScanning/Inspecting reports for fingerprint `bf602cef7e760ac6548d09291dffbeac14efd945d591d9a9f7d34399cf66f79a`.
+- Re-read mandatory Objecting, Cruding, Viewing, and Interfacing package contracts, plus the installed Gating owner README/AGENTS/manifest/policy surfaces.
+- Consulted Canonization textual authority for Canon001, Canon020, Canon021, Canon022, Canon023, Canon024, Canon025, Canon029, Canon045, Canon052, Canon053 and the Architecture Guard Matrix. Canonization remained READ_ONLY.
+- Market comparison against current Medusa Pricing documentation confirms the existing responsibility boundary: price sets/lists, currencies, quantity tiers, contextual rules, validity and deterministic best-price selection belong in Pricing; promotion/tax/payment/order-total concerns remain outside.
+
+### Target-to-canon mapping
+
+- Canon001/020: Pricing remains Symfony role-first under `App\\Pricing\\`; no Domain/Port/Adapter/Adaptor or generic technical bucket was introduced.
+- Canon021: Pricing owns no generic CRUD controller/route machinery; Cruding remains the generic CRUD owner.
+- Canon022/023/024/025/045/053: standalone/bundle dual mode and helper dependency contour remain canonical; development helper links use permitted sibling symlinks while production remains package/VCS based.
+- Canon029: repository-local PHPStan/PHP-CS-Fixer tooling is present and the post-remediation external Inspecting verification is GREEN.
+- Canon052: `gating/gate` remains the executable policy owner and consumer `.gating/` remains artifact-only. The tracked `.gating/README.md` is optional by rule text and its pending deletion is compatible with a fully ignored artifact surface.
+
+### RC-critical workstream
+
+- Consume the supplied historical RED evidence without duplicating stale pre-remediation analysis.
+- Verify the current repository through Composer integrity/security, full quality, strict Gating, Doctrine/schema checks, behavioral-evidence generation and fresh Inspecting.
+- Integrate the existing `.gating/README.md` deletion as a coherent Gating-artifact boundary cleanup once the current gates prove that no consumer policy depends on it.
+
+### Growth workstream
+
+- Staged/draft/active price-list publication, richer rule operators and operator/admin UX remain post-RC maturity candidates only.
+- Promotion evaluation, tax calculation, FX conversion, payments, cart mutation and order totals remain explicitly outside Pricing ownership.
+
+### Verification
+
+- `composer validate --strict --check-lock`: GREEN.
+- `composer audit --format=summary`: GREEN; no security vulnerability advisories.
+- `composer quality`: GREEN — PHPUnit 45 tests / 183 assertions, PHPStan GREEN, PHP-CS-Fixer GREEN, Doctrine schema parity/migrations GREEN, behavioral/UI evidence GREEN, standard Gating GREEN.
+- `composer gate:strict`: GREEN — 14 rules, 0 failed, 0 warning, 0 suppressed, two route-only non-applicable skips.
+- Fresh Inspecting report `D:\\PhpstormProjects\\www\\Inspecting\\.inspecting\\reports\\D--PhpstormProjects-www-Pricing-20261003-190053.json`: GREEN, 0 findings; PHPStan analyzer 0 errors; php-structure max cyclomatic complexity 12.
+- Managed PHP runtime probe is NOT_APPLICABLE because Pricing has no `public/` directory; no runtime was started or restarted.
+- Pricing has no controller/route/template/asset/navigation/form/browser/mobile UI surface in this change, so Panther/Playwright and screenshots are NOT_APPLICABLE.
+
+### Integration classification
+
+- `.gating/README.md`: coherent in-scope deletion. Canon052 permits but does not require a consumer boundary README; removing the tracked exception leaves `.gating/` entirely ignored and artifact-only. Current standard/strict Gating and full quality are GREEN without the file.
+- `CMCP_CHANGELOG.md`: orchestration journal synchronization required by the task contract.
+
+### Acceptance conclusion
+
+- The historical Canon052 failure and constructor-complexity observations are closed on the current repository state.
+- No remaining Pricing-owned RC-critical source change is justified by current evidence.
+
 
